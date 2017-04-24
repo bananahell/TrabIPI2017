@@ -1,4 +1,4 @@
-# ProjetoOA
+# Trab1IPI
 
 Trabalho 1  
 
@@ -32,6 +32,7 @@ UnB
 ## Estilo
 
 Processamentoo de Imagens. Escolhi opencv em vez de matlab. Que Deus perdoe minha alma.  
+Professor passou [isso aqui](http://www.ieee.org/conferences_events/conferences/publishing/templates.html).  
 Não querendo ser o chatão mas já sendo, acho importante ter um padrão de escrita (e inclusive praticar esse tipo de coisa).  
 Mesmo que isso venha do Jan, esse é o método de escrita usado pela [Google](https://google.github.io/styleguide/cppguide.html).  
 Outro método que valorizo é o de documentação por comentário, e eu vou estar usando [Javadocs](http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#cppblock).  
