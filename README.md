@@ -7,7 +7,7 @@ Trabalho de Introdução a Processamento de Imagens
 UnB  
 
 ## Specs
-
+ --> SOCOROOOOO!!!
 ### docs
 
   O pdf do professor tá nessa pasta.  
