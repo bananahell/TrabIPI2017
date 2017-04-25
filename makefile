@@ -1,5 +1,5 @@
 # Consts:
-# IncludeDIR = *.hpp DIR
+# IncludeDIR = *.h DIR
 # CC = gcc or g++
 # DB = gdb
 # CFLAGS = comp line flags (-ansi = ansi law; -Wall, -Wextra = warnings; -I./ = *.h DIR)
@@ -7,22 +7,22 @@
 # LibDIR = lib DIR
 # LibDIR -> enable when using, put $(LIBS) at end of gogo's command
 LibDIREC =./lib/
-LibDIR =./lib/ /home/user/gtest-1.7.0/include /home/user/gtest-1.7.0/lib/.libs/libgtest.a
+LibDIR =./lib/ /home/user/gtest-1.7.0/include /home/user/gtest-1.7.0/lib/.libs/libgtest.a /usr/local/include/opencv2
 IncludeDIR =./include/
-CppDIR=./src/
+CcDIR=./src/
 ObjDIR=./src/obj/
 CC=g++
 DB=gdb
 CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs
-LIBS=-lgtest
+LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lgtest -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = disco_magnetico.hpp
-mainObject = my_drive
+headers = 
+mainObject = trabalho
 objects = 
 
-# Set of *.hpp on which the *.cpp depend
+# Set of *.h on which the *.cc depend
 _DEPS = $(headers)
 DEPS = $(patsubst %,$(IncludeDIR)%,$(_DEPS))
 
@@ -31,7 +31,7 @@ _OBJ = $(mainObject).o $(objects)
 OBJ = $(patsubst %,$(ObjDIR)%,$(_OBJ))
 
 # Gathers *.o
-$(ObjDIR)%.o: $(CppDIR)%.cpp $(DEPS)
+$(ObjDIR)%.o: $(CcDIR)%.cc $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 # Creates executable (Linux)
@@ -43,10 +43,10 @@ $(mainObject): $(OBJ)
 prepareDIR:
 	mkdir -p $(LibDIREC)
 	mkdir -p $(IncludeDIR)
-	mkdir -p $(CppDIR)
+	mkdir -p $(CcDIR)
 	mkdir -p $(ObjDIR)
 	mv *.h $(IncludeDIR); true
-	mv *.cpp $(CppDIR); true
+	mv *.cc $(CcDIR); true
 
 # Call for execution
 .PHONY: execute
@@ -76,7 +76,7 @@ help:
 	@echo " make prepareDIR.= prepares project in the "lib include src/obj" structure (use this if all files are with this makefile)"
 	@echo " make execute....= executes succesfully compiled program"
 	@echo " make debug......= (gdb) debugs succesfully compiled program"
-	@echo " make cppcheck...= invokes cppcheck on all .cpp files in the directory, checking for all types of messages"
+	@echo " make cppcheck...= invokes cppcheck on all .cc files in the directory, checking for all types of messages*"
 	@echo "                         *(except missingIncludeSystem - cppceck can't find the gtest library)"
 	@echo " make clean......= removes objects from obj directory\n"
 	@echo " For use with program, change variables -headers- and -objects- inside makefile\n\n"
