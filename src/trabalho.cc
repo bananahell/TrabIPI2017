@@ -7,11 +7,7 @@
  *
  */
 
-#include <iostream>
-#include <opencv2/opencv.hpp>
-
-using namespace std;
-using namespace cv;
+#include <dec_int.h>
 
 
 /**
@@ -22,18 +18,17 @@ using namespace cv;
  */
 int main() {
 
-  Mat image;
-  char img_entrada[] = "./img/car.png";
-  image = imread(img_entrada, CV_LOAD_IMAGE_GRAYSCALE);
+  char img_entrada[] = "./img/a.jpg";
 
-  if (!image.data) {
-    cout << "No image data" << endl;
-    return -1;
-  }
-  namedWindow("Display Image", WINDOW_AUTOSIZE);
-  imshow("Display Image", image);
-
-  waitKey(0);
+  dec_int(img_entrada, 2);
+  dec_int(img_entrada, 4);
+  dec_int(img_entrada, 8);
+  dec_int(img_entrada, 16);
+  dec_int(img_entrada, 32);
+  dec_int(img_entrada, 64);
+  dec_int(img_entrada, 128);
+  dec_int(img_entrada, 256);
+  dec_int(img_entrada, 512);
 
   return 0;
 }
