@@ -75,6 +75,10 @@ void dec_int(string nomeFoto,int fator){
   destroyWindow("Interpolada");
   destroyWindow("Original");
 
+  image.release();
+  img2.release();
+  img3.release();
+
   destroyAllWindows(); 
 }
 
