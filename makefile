@@ -20,7 +20,7 @@ LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/l
 # -- ADAPT THIS IN YOUR PROGRAM --
 headers = funcao.h
 mainObject = trabalho
-objects = 
+objects = funcao.o
 
 # Set of *.h on which the *.cc depend
 _DEPS = $(headers)

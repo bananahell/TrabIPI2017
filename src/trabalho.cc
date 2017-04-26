@@ -8,15 +8,15 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 #include <string>
-//#include <funcao.h>
+#include <funcao.h>
 //#include <controller.hpp>
 
 using namespace std;
 using namespace cv;
 
 
-void dec_int(string nomeFoto,int fator){
-  
+/*void dec_int(string nomeFoto,int fator){
+
   string localFoto = "./img/" + nomeFoto;
   
   Mat image = imread(localFoto, CV_LOAD_IMAGE_COLOR);
@@ -71,7 +71,7 @@ void dec_int(string nomeFoto,int fator){
 
   waitKey(0);
 
-  destroyWindow("Dim");
+ /destroyWindow("Dim");
   destroyWindow("Interpolada");
   destroyWindow("Original");
 
@@ -79,8 +79,8 @@ void dec_int(string nomeFoto,int fator){
   img2.release();
   img3.release();
 
-  destroyAllWindows(); 
-}
+  destroyAllWindows();
+}*/
 
 int main() {
 
@@ -118,7 +118,6 @@ int main() {
       break;
       case 2:
         cout << "Em construcao"<< endl;
-
 
         dec_int("test80.jpg",2);
         dec_int("test80.jpg",4);
