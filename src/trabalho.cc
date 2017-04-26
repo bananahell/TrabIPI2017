@@ -4,11 +4,11 @@
  *
  * @author João Pedro de Salles Braga- 13/0143049
  */
-
 #include <iostream>
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 #include <string>
+//#include <funcao.h>
 //#include <controller.hpp>
 
 using namespace std;
@@ -37,7 +37,7 @@ void dec_int(string nomeFoto,int fator){
   //diminuicao da imagem
   for(int i = 0; i < image.rows; i+=fator){
     for(int j = 0; j < image.cols; j+=fator){
-      for(int c = 0;c < 3;c++){
+      for(int c = 0;c < 3; c++){
 
         img2.at<Vec3b>(i/fator,j/fator) = image.at<Vec3b>(i,j); 
       }
@@ -45,13 +45,12 @@ void dec_int(string nomeFoto,int fator){
     }
   }
 
-
   //interpolacao da imagem a partir da foto diminuida
   for(int i = 0; i < image.rows; i+=fator){
     for(int j = 0; j < image.cols; j+=fator){
       for(int cor = 0; cor < 3; cor++){
         for(int d = 0; d < fator; d++){
-          for(int c = 0;c < fator ; c++){          
+          for(int c = 0;c < fator; c++){          
 
             img3.at<Vec3b>(i+d,j+d)     = img2.at<Vec3b>(i/fator,j/fator); 
             img3.at<Vec3b>(i+d,j+c+d)   = img2.at<Vec3b>(i/fator,j/fator); 
@@ -70,15 +69,17 @@ void dec_int(string nomeFoto,int fator){
   namedWindow("Interpolada", WINDOW_AUTOSIZE);
   imshow("Interpolada", img3);
 
-
-  image.release();
-  img2.release();
-  img3.release();
- 
   waitKey(0);
+
+  destroyWindow("Dim");
+  destroyWindow("Interpolada");
+  destroyWindow("Original");
+
+  destroyAllWindows(); 
 }
 
 int main() {
+
   int opt;
   string nomeFoto;
   int fator = 0;
@@ -109,7 +110,7 @@ int main() {
 
         dec_int(nomeFoto,fator);
 
-        destroyAllWindows();      
+        //destroyAllWindows();      
       break;
       case 2:
         cout << "Em construcao"<< endl;

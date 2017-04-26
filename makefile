@@ -18,7 +18,7 @@ LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/l
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = 
+headers = funcao.h
 mainObject = trabalho
 objects = 
 
