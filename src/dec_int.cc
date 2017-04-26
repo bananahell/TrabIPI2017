@@ -21,8 +21,8 @@ void dec_int(char *img_entrada,  int fator) {
     return;
   }
 
-  namedWindow("Display Image1", WINDOW_AUTOSIZE);
-  imshow("Display Image1", imagem_orig);
+  namedWindow("Original", WINDOW_AUTOSIZE);
+  imshow("Original", imagem_orig);
 
 
   Mat imagem_menor(imagem_orig.rows/fator, imagem_orig.cols/fator, CV_8UC3, Scalar(0,0,0));
@@ -35,8 +35,8 @@ void dec_int(char *img_entrada,  int fator) {
     }
   }
 
-  namedWindow("Display Image2", WINDOW_AUTOSIZE);
-  imshow("Display Image2", imagem_menor);
+  namedWindow("Menor", WINDOW_AUTOSIZE);
+  imshow("Menor", imagem_menor);
 
   Mat imagem_result(imagem_menor.rows*fator, imagem_menor.cols*fator, CV_8UC3, Scalar(0,0,0));
 
@@ -53,8 +53,8 @@ void dec_int(char *img_entrada,  int fator) {
     }
   }
 
-  namedWindow("Display Image3", WINDOW_AUTOSIZE);
-  imshow("Display Image3", imagem_result);
+  namedWindow("Borrada", WINDOW_AUTOSIZE);
+  imshow("Borrada", imagem_result);
 
 
   waitKey(0);
