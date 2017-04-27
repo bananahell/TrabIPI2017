@@ -13,14 +13,14 @@ CcDIR=./src/
 ObjDIR=./src/obj/
 CC=g++
 DB=gdb
-CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs
+CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs -lm
 LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = funcao.h
+headers = funcoes.h
 mainObject = trabalho
-objects = funcao.o
+objects = funcoes.o
 
 # Set of *.h on which the *.cc depend
 _DEPS = $(headers)
