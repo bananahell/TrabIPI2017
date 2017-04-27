@@ -33,7 +33,8 @@ int main() {
          << "|2-Diminuir/Interpolar em sequencia     |" << endl
          << "|3-filtrar imagem                       |" << endl
          << "|4-filtrar imagem diminuida/interpolada |" << endl
-         << "|5-sair                                 |" << endl
+         << "|5-filtro media                         |" << endl
+         << "|6-sair                                 |" << endl
          << "+---------------------------------------+" << endl;
 
     cin >> opt;
@@ -86,6 +87,15 @@ int main() {
         destroyAllWindows(); 
       break;
       case 5:
+        
+        cout << "Digite o nome da imagem" << endl;
+        cin >> nomeFoto;
+
+        filtroMedia(nomeFoto);
+        destroyAllWindows(); 
+
+      break;
+      case 6:
         cout << "Tchau!" << endl;
       break;
       default:
