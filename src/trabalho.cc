@@ -91,7 +91,7 @@ int main() {
         cout << "Digite o nome da imagem" << endl;
         cin >> nomeFoto;
 
-        filtroMedia(nomeFoto);
+        filtro(nomeFoto);
         destroyAllWindows(); 
 
       break;
@@ -103,7 +103,7 @@ int main() {
       break;
     }
 
-  }while(opt != 5);
+  }while(opt != 6);
 
   return 0;
 }

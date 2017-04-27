@@ -9,5 +9,3 @@ Mat dec_int(string nomeFoto,int fator,int cont);
 void filtro(string nomearq);
 
 void filtro(Mat imgEntrada);
-
-void filtroMedia(string nomefoto);

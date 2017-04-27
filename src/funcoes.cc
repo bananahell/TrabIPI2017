@@ -98,16 +98,8 @@ void filtro(string nomearq){
 
   Mat imgfiltro(3,3,CV_8UC3,Scalar(0,0,0));
 
-  int imgfiltro2[3][3];
-
-  for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-      imgfiltro2[i][j] = -1;
-    }
-  }
-  imgfiltro2[1][1] = 9;
-
-  for(int c = 0; c < 3;c++){
+  //essa iimagem transforma em uma parada mto legal 
+  /*for(int c = 0; c < 3;c++){
 
     imgfiltro.at<Vec3b>(0,0)[c] =  9;
     imgfiltro.at<Vec3b>(0,1)[c] =  1;
@@ -118,96 +110,134 @@ void filtro(string nomearq){
     imgfiltro.at<Vec3b>(2,0)[c] =  9;
     imgfiltro.at<Vec3b>(2,1)[c] =  1;
     imgfiltro.at<Vec3b>(2,2)[c] =  9; 
-  }
+  }*/
 
+  for(int i = 0;i < imgfiltro.rows; i++){
+    for(int j = 0;j < imgfiltro.cols; j++){  
+      for(int c = 0; c < 3;c++){
+
+        imgfiltro.at<Vec3b>(i,j)[c] = 1;
+      
+      }
+    }
+  }
   namedWindow("filtro",WINDOW_AUTOSIZE);
   imshow("filtro",imgfiltro);
 
   Mat imgfiltrada(imgOriginal.rows,imgOriginal.cols,CV_8UC3,Scalar(0,0,0));
 
-  //origem do filtro (1,1)
+ //origem do filtro (1,1)
   for(int i = 0; i < imgOriginal.rows; i++){
     for(int j = 0; j < imgOriginal.cols; j++){
       for(int c = 0; c < 3; c++){
-        for(int x = imgfiltro.rows; x > 0; x--){
-          for(int y = imgfiltro.cols; y > 0; y--){
+        if(i == 0 && j == 0){
 
-            if(i == 0 && j == 0){
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
+        
+        }else if(i == 0 && j!= imgOriginal.cols - 1){//se ja passou do primeiro pixel,mas mantem na primeira linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]  +
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]  +
-                                              imgfiltro2[2][2] * imgOriginal.at<Vec3b>(i+1,j+1)[c]);
-            
-            }else if(i == 0 && j!= imgOriginal.cols - 1){//se ja passou do primeiro pixel,mas mantem na primeira linha
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
+          
+        }else if(i == 0 && j == imgOriginal.cols - 1){//no ultimo pixel da primeira linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]  +
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]  +
-                                              imgfiltro2[2][2] * imgOriginal.at<Vec3b>(i+1,j+1)[c]+
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]);
-              
-            }else if(i == 0 && j == imgOriginal.cols - 1){//no ultimo pixel da primeira linha
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i+1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
+          
+        }else if(j == 0 && i != imgOriginal.rows - 1){//toda a primeira coluna antes da primeira e ultima linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]  +
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]  +
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i+1,j-1)[c]);
-              
-            }else if(j == 0 && i != imgOriginal.rows - 1){//toda a primeira coluna antes da primeira e ultima linha
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[0][2] * imgOriginal.at<Vec3b>(i-1,j+1)[c]+
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]  +
-                                              imgfiltro2[2][2] * imgOriginal.at<Vec3b>(i+1,j+1)[c]+
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]);
+        }else if(i != 0 && i != imgOriginal.rows -1 && j == imgOriginal.cols - 1){//toda a ultima coluna antes da primeira e da ultima linha
 
-            }else if(i != 0 && i != imgOriginal.rows -1 && j == imgOriginal.cols - 1){//toda a ultima coluna antes da primeira e da ultima linha
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i+1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[0][0] * imgOriginal.at<Vec3b>(i-1,j-1)[c]+
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]  +
-                                              imgfiltro2[2][0] * imgOriginal.at<Vec3b>(i+1,j-1)[c]+
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]);
+        }else if(i == imgOriginal.rows - 1 && j == 0){//ultima linha e primeira coluna
 
-            }else if(i == imgOriginal.rows - 1 && j == 0){//ultima linha e primeira coluna
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i-1,j+1)[c]+
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]);
+        }else if(i == imgOriginal.rows - 1 && j != imgOriginal.cols - 1 && j != 0){//toda a ultima linha antes da ultima coluna e depois da primeira
 
-            }else if(i == imgOriginal.rows - 1 && j != imgOriginal.cols - 1 && j != 0){//toda a ultima linha antes da ultima coluna e depois da primeira
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]  +
-                                              imgfiltro2[0][0] * imgOriginal.at<Vec3b>(i-1,j-1)[c]+
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[0][2] * imgOriginal.at<Vec3b>(i-1,j+1)[c]+
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]);
+        }else if(i == imgOriginal.rows -1 && j == imgOriginal.cols - 1){//ultima linha e ultima coluna
 
-            }else if(i == imgOriginal.rows -1 && j == imgOriginal.cols - 1){//ultima linha e ultima coluna
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[0][0] * imgOriginal.at<Vec3b>(i-1,j-1)[c]+
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]);
+        }else{//quando nao eh nenhum dos outros casos
 
-            }else{//quando nao eh nenhum dos outros casos
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+                                          imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
+                                          imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
+                                          imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
+                                          imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
+                                          imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      + 
+                                          imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c])/9;
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro2[1][1] * imgOriginal.at<Vec3b>(i,j)[c]    + 
-                                              imgfiltro2[0][0] * imgOriginal.at<Vec3b>(i-1,j-1)[c]+
-                                              imgfiltro2[0][1] * imgOriginal.at<Vec3b>(i-1,j)[c]  +
-                                              imgfiltro2[0][2] * imgOriginal.at<Vec3b>(i-1,j+1)[c]+
-                                              imgfiltro2[1][0] * imgOriginal.at<Vec3b>(i,j-1)[c]  +
-                                              imgfiltro2[1][2] * imgOriginal.at<Vec3b>(i,j+1)[c]  +
-                                              imgfiltro2[2][0] * imgOriginal.at<Vec3b>(i+1,j+1)[c]+
-                                              imgfiltro2[2][1] * imgOriginal.at<Vec3b>(i+1,j)[c]  +
-                                              imgfiltro2[2][2] * imgOriginal.at<Vec3b>(i+1,j+1)[c]);
-            }
-          }
         }
       }
     }
@@ -228,21 +258,12 @@ void filtro(Mat imgEntrada){
 
   Mat imgfiltro(3,3,CV_8UC3,Scalar(0,0,0));
 
+//inicializa a matriz filtro
 for(int i = 0;i < 3;i++){
   for(int j = 0; j < 3; j++){
     for(int c = 0; c < 3;c++){
 
-      /*imgfiltro.at<Vec3b>(0,0)[c] =  1;
-      imgfiltro.at<Vec3b>(0,1)[c] =  1;
-      imgfiltro.at<Vec3b>(0,2)[c] =  1;
-      imgfiltro.at<Vec3b>(1,0)[c] =  1;
-      imgfiltro.at<Vec3b>(1,1)[c] =  9;
-      imgfiltro.at<Vec3b>(1,2)[c] =  1;
-      imgfiltro.at<Vec3b>(2,0)[c] =  1;
-      imgfiltro.at<Vec3b>(2,1)[c] =  1;
-      imgfiltro.at<Vec3b>(2,2)[c] =  1; */
-
-      imgfiltro.at<Vec3b>(i,j)[c] = /*rand()%10*/1;
+      imgfiltro.at<Vec3b>(i,j)[c] = 1;
     }
   }  
 }
@@ -253,15 +274,20 @@ for(int i = 0;i < 3;i++){
   for(int i = 0; i < imgEntrada.rows; i++){
     for(int j = 0; j < imgEntrada.cols; j++){
       for(int c = 0; c < 3; c++){
-        for(int x = imgfiltro.rows; x > 0; x--){
-          for(int y = imgfiltro.cols; y > 0; y--){
+        // for(int x = imgfiltro.rows; x > 0; x--){
+        //   for(int y = imgfiltro.cols; y > 0; y--){
 
             if(i == 0 && j == 0){
 
               imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
-                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]);
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
+                                              imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
             
             }else if(i == 0 && j!= imgEntrada.cols - 1){//se ja passou do primeiro pixel,mas mantem na primeira linha
 
@@ -269,14 +295,23 @@ for(int i = 0;i < 3;i++){
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
-                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]);
+                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
+                                              imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
               
             }else if(i == 0 && j == imgEntrada.cols - 1){//no ultimo pixel da primeira linha
 
               imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
-                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j-1)[c]);
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j-1)[c]    +
+                                              imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
               
             }else if(j == 0 && i != imgEntrada.rows - 1){//toda a primeira coluna antes da primeira e ultima linha
 
@@ -285,7 +320,10 @@ for(int i = 0;i < 3;i++){
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
-                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]);
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
+                                              imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
 
             }else if(i != 0 && i != imgEntrada.rows -1 && j == imgEntrada.cols - 1){//toda a ultima coluna antes da primeira e da ultima linha
 
@@ -294,14 +332,22 @@ for(int i = 0;i < 3;i++){
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j-1)[c]    +
-                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]);
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
+                                              imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
 
             }else if(i == imgEntrada.rows - 1 && j == 0){//ultima linha e primeira coluna
 
               imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
-                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]);
+                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
+                                              imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
 
             }else if(i == imgEntrada.rows - 1 && j != imgEntrada.cols - 1 && j != 0){//toda a ultima linha antes da ultima coluna e depois da primeira
 
@@ -310,14 +356,22 @@ for(int i = 0;i < 3;i++){
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
-                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]);
+                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
 
             }else if(i == imgEntrada.rows -1 && j == imgEntrada.cols - 1){//ultima linha e ultima coluna
 
               imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
-                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]);
+                                              imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
+                                              imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
 
             }else{//quando nao eh nenhum dos outros casos
 
@@ -329,11 +383,11 @@ for(int i = 0;i < 3;i++){
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      + 
-                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]);
+                                              imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c])/9;
 
             }
-          }
-        }
+        //   }
+        // }
       }
     }
   }
@@ -344,65 +398,3 @@ for(int i = 0;i < 3;i++){
 waitKey(0);
 
 }
-
-
-void filtroMedia(string nomefoto){
-
-  Mat imgEntrada = imread(nomefoto,CV_LOAD_IMAGE_COLOR);
-  Mat imgfiltro(3,3,CV_8UC3,Scalar(0,0,0));
-  Mat imgfiltrada(imgEntrada.rows+1,imgEntrada.cols+1,CV_8UC3,Scalar(0,0,0));
-
-
-  namedWindow("Original",WINDOW_AUTOSIZE);
-  imshow("Original",imgEntrada);
-
-
-  for(int i = 0;i < 3; i ++){
-    for(int j = 0;j < 3; j++){
-      for(int c; c < 3; c++){
-
-        imgfiltro.at<Vec3b>(i,j)[c] = 1;
-
-      }
-    }
-  }
-
-  for(int i = 0; i < imgEntrada.rows; i++){
-    for(int j = 0; j < imgEntrada.cols; j++){
-      for(int c = 0;c < 3; c++){
-
-        /*f(i == 0 && j == 0){
-          imgfiltrada.at<Vec3b>(i,j)[c] = (imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]  +
-                                          imgFiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]  +
-                                          imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c])/9;
-
-       }else if(i == 0 && j == )*/
-
-
-        imgfiltrada.at<Vec3b>(i,j)[c] = (imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]  +
-                                          imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]    +
-                                          imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]  +
-                                          imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c])/9;
-      }
-    }
-  }
-
-
-  namedWindow("filtro 2",WINDOW_AUTOSIZE);
-  imshow("filtro 2",imgfiltrada);
-
- waitKey(0);
-
-}
-
