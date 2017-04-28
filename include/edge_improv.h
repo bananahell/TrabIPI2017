@@ -13,4 +13,6 @@
 using namespace std;
 using namespace cv;
 
-void dec_int(char *img_entrada, int fator);
+void edge_improv(char *img_entrada);
+
+Mat filtro_custom(Mat img, int fator);

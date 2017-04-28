@@ -29,33 +29,31 @@ void dec_int(char *img_entrada,  int fator) {
 
   for( int y = 0; y < imagem_orig.rows; y+=fator ) {
     for( int x = 0; x < imagem_orig.cols; x+=fator ) {
-      for (int c = 0; c < 3; ++c) {
-        imagem_menor.at<Vec3b>(y/fator, x/fator) = imagem_orig.at<Vec3b>(y, x);
-      }
+      imagem_menor.at<Vec3b>(y/fator, x/fator) = imagem_orig.at<Vec3b>(y, x);
     }
   }
 
+  imwrite("./img/menor.jpg", imagem_menor);
   namedWindow("Menor", WINDOW_AUTOSIZE);
   imshow("Menor", imagem_menor);
 
   Mat imagem_result(imagem_menor.rows*fator, imagem_menor.cols*fator, CV_8UC3, Scalar(0,0,0));
 
-  for (int y = 0; y < imagem_menor.rows; ++y ) {
-    for( int x = 0; x < imagem_menor.cols; ++x ) {
-      for (int c = 0; c < 3; ++c) {
-        imagem_result.at<Vec3b>(y*fator, x*fator) = imagem_menor.at<Vec3b>(y, x);
-        for (int rows_vazias = 0; rows_vazias < fator; ++rows_vazias) {
-          for (int cols_vazias = 0; cols_vazias < fator; ++cols_vazias) {
-            imagem_result.at<Vec3b>((y*fator) + rows_vazias, (x*fator) + cols_vazias) = imagem_result.at<Vec3b>(y*fator, x*fator);
-          }
+  for (int y = 0; y < imagem_menor.rows; ++y) {
+    for (int x = 0; x < imagem_menor.cols; ++x) {
+      imagem_result.at<Vec3b>(y*fator, x*fator) = imagem_menor.at<Vec3b>(y, x);
+      for (int rows_vazias = 0; rows_vazias < fator; ++rows_vazias) {
+        for (int cols_vazias = 0; cols_vazias < fator; ++cols_vazias) {
+          imagem_result.at<Vec3b>((y*fator) + rows_vazias, (x*fator) + cols_vazias) = imagem_result.at<Vec3b>(y*fator, x*fator);
         }
       }
     }
   }
 
+  imwrite("./img/borrada.jpg", imagem_result);
   namedWindow("Borrada", WINDOW_AUTOSIZE);
   imshow("Borrada", imagem_result);
 
-
   waitKey(0);
+
 }
