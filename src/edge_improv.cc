@@ -79,6 +79,8 @@ Mat filtro_custom(Mat img, int fator) {
   double pixel_aux;
   int quant_pixels;
   int i, j;
+  bool row_menor_aval, row_maior_aval;
+  bool col_menor_aval, col_maior_aval;
   Mat imagem_nova(img.rows, img.cols, CV_8UC3, Scalar(0,0,0));
   if (fator %  2 == 0) {
     return imagem_nova;
@@ -93,44 +95,68 @@ Mat filtro_custom(Mat img, int fator) {
 
         pixel_aux += img.at<Vec3b>(row, col)[chn];
         quant_pixels++;
-
+        
+        row_menor_aval = true;
+        row_maior_aval = true;
         for (i = 1; i <= fator/2; ++i) {
 
-          if (row != i-1) {
+          if (row != i-1 && row_menor_aval) {
             pixel_aux += img.at<Vec3b>(row - i, col)[chn];
             quant_pixels++;
+            col_menor_aval = true;
+            col_maior_aval = true;
             for (j = 1; j <= fator/2; ++j) {
-              if (col != j-1) {
+              if (col != j-1 && col_menor_aval) {
                 pixel_aux += img.at<Vec3b>(row - i, col - j)[chn];
                 quant_pixels++;
+              } else {
+                col_menor_aval = false;
               }
-              if (col != img.cols - j) {
+              if (col != img.cols-j && col_maior_aval) {
                 pixel_aux += img.at<Vec3b>(row - i, col + j)[chn];
                 quant_pixels++;
+              } else {
+                col_maior_aval = false;
               }
             }
+          } else {
+            row_menor_aval = false;
           }
-          if (row != img.rows - i) {
+    
+          if (row != img.rows-i && row_maior_aval) {
             pixel_aux += img.at<Vec3b>(row + i, col)[chn];
             quant_pixels++;
+            col_menor_aval = true;
+            col_maior_aval = true;
             for (j = 1; j <= fator/2; ++j) {
-              if (col != j-1) {
+              if (col != j-1 && col_menor_aval) {
                 pixel_aux += img.at<Vec3b>(row + i, col - j)[chn];
                 quant_pixels++;
+              } else {
+                col_menor_aval = false;
               }
-              if (col != img.cols - j) {
+              if (col != img.cols-j && col_maior_aval) {
                 pixel_aux += img.at<Vec3b>(row + i, col + j)[chn];
                 quant_pixels++;
+              } else {
+                col_maior_aval = false;
               }
             }
+          } else {
+            row_maior_aval = false;
           }
-          if (col != i-1) {
+          
+          if (col != i-1 && col_menor_aval) {
             pixel_aux += img.at<Vec3b>(row, col - i)[chn];
             quant_pixels++;
+          } else {
+            col_menor_aval = false;
           }
-          if (col != img.cols - i) {
+          if (col != img.cols-i && col_maior_aval) {
             pixel_aux += img.at<Vec3b>(row, col + i)[chn];
             quant_pixels++;
+          } else {
+            col_maior_aval = false;
           }
 
         }
