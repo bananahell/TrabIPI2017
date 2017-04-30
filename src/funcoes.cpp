@@ -87,7 +87,7 @@ Mat dec_int(string nomeFoto,int fator,int cont){
 }
 
 
-void filtro(string nomearq){
+void edge_imporv(string nomearq){
   srand(time(NULL));
 
   string localFoto = "./img/" + nomearq;
@@ -256,7 +256,7 @@ void filtro(string nomearq){
 }
 
 
-void filtro(Mat imgEntrada){
+void edge_imporv(Mat imgEntrada){
   srand(time(NULL));
 
   namedWindow("Original",WINDOW_AUTOSIZE);

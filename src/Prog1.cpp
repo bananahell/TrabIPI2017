@@ -2,9 +2,7 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 #include <string>
-#include <funcoes.h>
-#include <ctime>
-#include <cmath>
+#include <funcoes.hpp>
 
 using namespace std;
 using namespace cv;
@@ -16,21 +14,20 @@ int main(){
 
 	cout << "usando dec_int para imagem test80.jpg" << endl;
 
-	dec_int("./img/test80.jpg",2);
-	dec_int("./img/test80.jpg",4);
-	dec_int("./img/test80.jpg",8);
+	dec_int("test80.jpg",2,1);
+	dec_int("test80.jpg",4,2);
+	dec_int("test80.jpg",8,3);
 
-
-	cout << "Filtro para imagem ja reduzida" << endl;
+	cout << "edge_imporv para imagem ja reduzida" << endl;
 	getchar();
 
-  	Mat imgTest80 = imread(",/img/test80/jpg", CV_LOAD_IMAGE_COLOR);
+  	Mat imgTest80 = imread("./img/test80.jpg", CV_LOAD_IMAGE_COLOR);
 
 	Mat imgMenor(imgTest80.rows/4,imgTest80.cols/4,CV_LOAD_IMAGE_COLOR,Scalar(0,0,0));
 
-	resize( imgTest80, imgMenor , Size(imgTest80.rows/4,imgTest80.cols/4));
+	resize( imgTest80, imgMenor , Size(imgTest80.rows,imgTest80.cols),CV_INTER_CUBIC);
 
-	filtro(imgMenor);
+	edge_imporv(imgMenor);
 
 	return 0;
 }
