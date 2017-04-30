@@ -14,11 +14,11 @@ ObjDIR=./src/obj/
 CC=g++
 DB=gdb
 CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs -lm
-LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
+LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lopencv_highgui -lopencv_imgproc -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = funcoes.h
+headers = funcoes.hpp
 mainObject = trabalho
 objects = funcoes.o
 
@@ -31,7 +31,7 @@ _OBJ = $(mainObject).o $(objects)
 OBJ = $(patsubst %,$(ObjDIR)%,$(_OBJ))
 
 # Gathers *.o
-$(ObjDIR)%.o: $(CcDIR)%.cc $(DEPS)
+$(ObjDIR)%.o: $(CcDIR)%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 # Creates executable (Linux)
@@ -45,9 +45,8 @@ prepareDIR:
 	mkdir -p $(IncludeDIR)
 	mkdir -p $(CcDIR)
 	mkdir -p $(ObjDIR)
-	mkdir -p ./img/res
-	mv *.h $(IncludeDIR); true
-	mv *.cc $(CcDIR); true
+	mv *.hpp $(IncludeDIR); true
+	mv *.cpp $(CcDIR); true
 
 # Call for execution
 .PHONY: execute

@@ -8,13 +8,13 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 #include <string>
-#include <funcoes.h>
+#include <funcoes.hpp>
 #include <ctime>
 #include <cmath>
 
 using namespace std;
 using namespace cv;
-
+/*
 int main() {
   int cont = 0;
   int opt;
@@ -107,6 +107,41 @@ int main() {
     }
 
   }while(opt != 6);
+
+  return 0;
+}
+*/
+
+int main(){
+  
+  cout << "comecando o programa" << endl;
+  getchar();
+
+  cout << "usando dec_int para imagem test80.jpg" << endl;
+
+  for(int i = 2; i < 16;i = i * 2){
+    cout << "Fator " << i << endl;
+    dec_int("test80.jpg",i,i);
+  }
+
+  cout << "Filtro para imagem ja reduzida" << endl;
+  getchar();
+
+  Mat imgTest80 = imread("./img/test80.jpg", CV_LOAD_IMAGE_COLOR);
+
+
+  if (!imgTest80.data) {
+    cout << "No image data" << endl;
+    exit(0);//refazer isso aqui, eh feio
+  }
+
+  Mat imgMenor(imgTest80.rows/4,imgTest80.cols/4,CV_LOAD_IMAGE_COLOR,Scalar(0,0,0));
+
+  resize(imgTest80,imgMenor,Size(imgTest80.rows,imgTest80.cols));
+
+  filtro(imgMenor);
+
+
 
   return 0;
 }

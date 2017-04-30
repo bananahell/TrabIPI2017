@@ -1,4 +1,4 @@
-#include <funcoes.h>
+#include <funcoes.hpp>
 #include <string>
 
 using namespace std;
@@ -92,6 +92,12 @@ void filtro(string nomearq){
 
   string localFoto = "./img/" + nomearq;
   Mat imgOriginal = imread(localFoto, CV_LOAD_IMAGE_COLOR);
+
+
+  if (!imgOriginal.data) {
+    cout << "No image data" << endl;
+    exit(0);//refazer isso aqui, eh feio
+  }
 
   namedWindow("Original",WINDOW_AUTOSIZE);
   imshow("Original",imgOriginal);
