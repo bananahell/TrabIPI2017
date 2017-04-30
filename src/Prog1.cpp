@@ -14,9 +14,9 @@ int main(){
 
 	cout << "usando dec_int para imagem test80.jpg" << endl;
 
-	dec_int("test80.jpg",2,1);
-	dec_int("test80.jpg",4,2);
-	dec_int("test80.jpg",8,3);
+	dec_int("test80.jpg",2);
+	dec_int("test80.jpg",4);
+	dec_int("test80.jpg",8);
 
 	cout << "edge_imporv para imagem ja reduzida" << endl;
 	getchar();
@@ -25,7 +25,7 @@ int main(){
 
 	Mat imgMenor(imgTest80.rows/4,imgTest80.cols/4,CV_LOAD_IMAGE_COLOR,Scalar(0,0,0));
 
-	resize( imgTest80, imgMenor , Size(imgTest80.rows,imgTest80.cols),CV_INTER_CUBIC);
+	resize( dec_int("test80.jpg",4), imgMenor , Size(imgTest80.rows,imgTest80.cols),CV_INTER_CUBIC);
 
 	edge_imporv(imgMenor);
 

@@ -3,9 +3,9 @@
 
 using namespace std;
 
-Mat dec_int(string nomeFoto,int fator,int cont){
+Mat dec_int(string nomeFoto,int fator){
   stringstream stream;
-  string strcont;
+  string strfator;
   string localFoto = "./img/" + nomeFoto;
   
   Mat imgOri = imread(localFoto, CV_LOAD_IMAGE_COLOR);
@@ -16,9 +16,9 @@ Mat dec_int(string nomeFoto,int fator,int cont){
     exit(0);//refazer isso aqui, eh feio
   }
  
-  stream << cont;
-  strcont = stream.str();
-  string nomeOriginal = "Original " + strcont;
+  stream << fator;
+  strfator = stream.str();
+  string nomeOriginal = "Original " + strfator;
   namedWindow(nomeOriginal,WINDOW_AUTOSIZE);
   imshow(nomeOriginal,imgOri);
 
@@ -67,8 +67,13 @@ Mat dec_int(string nomeFoto,int fator,int cont){
   namedWindow("Dim",WINDOW_AUTOSIZE);
   imshow("Dim",imgDim);
 
-  namedWindow("Interpolada",WINDOW_AUTOSIZE);
-  imshow("Interpolada",imgInt);
+  stream.str(" ");
+
+  stream << fator;
+  strfator = stream.str();
+  string nomeInt = "Interpolada" + strfator;
+  namedWindow(nomeInt,WINDOW_AUTOSIZE);
+  imshow(nomeInt,imgInt);
 
 
   waitKey(0);

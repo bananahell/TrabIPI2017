@@ -4,7 +4,7 @@
 using namespace std;
 using namespace cv;
 
-Mat dec_int(string nomeFoto,int fator,int cont);
+Mat dec_int(string nomeFoto,int fator);
 
 void edge_imporv(string nomearq);
 
