@@ -57,9 +57,12 @@ int main() {
       case 2:
         cout << "Gerando sequencia"<< endl;
 
+        cout << "Digite o nome da imagem" << endl;
+        cin >> nomeFoto;
+
         for(int i = 2; i < 32;i = i * 2){
           cout << i << endl;
-            dec_int("test80.jpg",i,i);
+            dec_int(nomeFoto,i,i);
         }
 
         destroyAllWindows();

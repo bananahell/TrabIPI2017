@@ -45,6 +45,7 @@ prepareDIR:
 	mkdir -p $(IncludeDIR)
 	mkdir -p $(CcDIR)
 	mkdir -p $(ObjDIR)
+	mkdir -p ./img/res
 	mv *.h $(IncludeDIR); true
 	mv *.cc $(CcDIR); true
 
