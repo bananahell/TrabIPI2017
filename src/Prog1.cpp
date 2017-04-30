@@ -21,11 +21,11 @@ int main(){
 	cout << "edge_imporv para imagem ja reduzida" << endl;
 	getchar();
 
-  	Mat imgTest80 = imread("./img/test80.jpg", CV_LOAD_IMAGE_COLOR);
+  	Mat imgTest80 = imread("./img/test80.jpg",CV_LOAD_IMAGE_COLOR);
 
-	Mat imgMenor(imgTest80.rows/4,imgTest80.cols/4,CV_LOAD_IMAGE_COLOR,Scalar(0,0,0));
+	Mat imgMenor(imgTest80.rows,imgTest80.cols,CV_LOAD_IMAGE_COLOR,Scalar(0,0,0));
 
-	resize( dec_int("test80.jpg",4), imgMenor , Size(imgTest80.rows,imgTest80.cols),CV_INTER_CUBIC);
+	resize(dec_int("test80.jpg",4),imgMenor,Size(imgTest80.cols,imgTest80.rows),CV_INTER_CUBIC);
 
 	edge_imporv(imgMenor);
 
