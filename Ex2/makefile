@@ -14,13 +14,13 @@ ObjDIR=./src/obj/
 CC=g++
 DB=gdb
 CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs
-LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lgtest -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
+LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lgtest -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lm
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = dec_int.h edge_improv.h
+headers = realce_power_law.h
 mainObject = trabalho
-objects = dec_int.o edge_improv.o
+objects = realce_power_law.o
 
 # Set of *.h on which the *.cc depend
 _DEPS = $(headers)

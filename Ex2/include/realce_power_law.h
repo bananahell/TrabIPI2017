@@ -8,9 +8,13 @@
  */
 
 #include <iostream>
+#include <vector>
 #include <opencv2/opencv.hpp>
+#include <cmath>
 
 using namespace std;
 using namespace cv;
 
-void dec_int(char *img_entrada, int fator);
+Mat trans_power_law(char *img, double fator);
+
+Mat trans_hist(char *img);
