@@ -9,7 +9,7 @@ using namespace cv;
 
 
 void geraHisto(string nomefoto){
-	int Rk[255];
+	int Rk[256];
 	vector<float> media;
 	string localFoto = "./img/" + nomefoto;
 
@@ -21,7 +21,7 @@ void geraHisto(string nomefoto){
 	}
 
 
-	for(int i = 0;i <= 255; i++){
+	for(int i = 0;i < 256; i++){
 		Rk[i] = 0;
 	}
 
@@ -33,33 +33,47 @@ void geraHisto(string nomefoto){
 		}
 	}
 
-	for(int i = 0;i < 255;i++){
+	int index = 0;
+
+	for(int i = 0;i < 256;i++){
 		if(Rk[i] != 0){
 
-		media.push_back(Rk[i]/(foto.rows*foto.cols));
+			media.push_back((float)Rk[i]/(float)foto.total());
 			
-		//	cout << i << " - " << media[i] << " - " << Rk[i] << endl;
-
+			cout << i << "index - " << index << " - " << media.at(index) << " - " << Rk[i] << endl;
+			index++;
 		}
 	}
+	int i  = 0;
+	float mediaAux = 0;
+	double fractpart,intpart;
 
-	int mediaAux = 0;
+	cout << foto.total() <<  endl;
 
 	for(int linha = 0;linha < foto.rows;linha++){
 		for(int coluna = 0; coluna < foto.cols;coluna++){
 
 			mediaAux = 0;
-			for(size_t i = 0;i < media.size();i++){
-				if(Rk[i] != 0){
+			//for(int i = 0;i < index;i++){
+				i = 0;
+				for(int j = 0;j < 256;j++){
+					
+					if(Rk[j] != 0){
 
-					for(int j = 0;j < 255;j++){
+						mediaAux = (float)(media.at(i) * 255); 
+						cout << j << "index - " << i << " - " << media.at(i) << " - " << Rk[j] << endl;
 
-						mediaAux += media[i]*Rk[j];  
+						i++; 
 					}
+		
+					fractpart = modf(mediaAux,&intpart);
+					if(fractpart >= 0.5){
+						intpart += 1;
+					}
+
+					fotoHisto.at<uchar>(linha,coluna) = intpart;
 				}
-			}
-/*			cout << mediaAux << endl;
-*/			fotoHisto.at<uchar>(linha,coluna) = (int) mediaAux;
+			//}
 		}
 	}
 
@@ -102,6 +116,8 @@ int main(){
 	getchar(); 
 
 	geraHisto(nomeFoto);
+
+	//edge_imporv(nomeFoto);
 
 	destroyAllWindows();
 
