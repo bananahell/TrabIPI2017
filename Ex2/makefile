@@ -18,9 +18,9 @@ LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/l
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = realce_power_law.h
+headers = realces.h
 mainObject = trabalho
-objects = realce_power_law.o
+objects = realces.o
 
 # Set of *.h on which the *.cc depend
 _DEPS = $(headers)
