@@ -7,11 +7,66 @@
 using namespace std;
 using namespace cv;
 
+void geraGrfHisto(Mat fotoHisto,string nomeFoto){
 
+	vector<int> histoEQ;
+
+	for(int i = 0;i < 256; i++){
+		histoEQ.push_back(0);
+	}
+
+	for(int linha = 0; linha < fotoHisto.rows;linha++){
+		for(int coluna = 0;coluna < fotoHisto.cols;coluna++){
+
+			histoEQ.at(fotoHisto.at<uchar>(linha,coluna))++;
+		}
+	}
+
+	Mat grfHistoEQ(157,257,CV_LOAD_IMAGE_GRAYSCALE,Scalar(255,255,255));
+	
+	//gerar imagem do grafico
+	for(int i = 255; i > 1; i--){
+		if(histoEQ.at(i) != 0){
+					
+			for(int j = (histoEQ.at(i)&80); j > 0 ;j--){
+				grfHistoEQ.at<uchar>(155 - j,i) = 0;
+			}
+		}
+	}
+
+	//gera "imagem" no terminal do grafico
+	for(int i = 0;i < 256; i++){
+		if(histoEQ.at(i) != 0){
+			
+			if( i >= 100){
+				cout << i << " - ";
+			}else{
+				if(i >= 10){
+
+					cout << i<< "  - ";
+				}else{
+
+					cout << i<< "   - ";
+				}
+			}
+					
+			for(int j = (histoEQ.at(i)&80); j > 1 ; j--){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}
+
+	string nomeWindow = "Histo EQ " + nomeFoto;
+	namedWindow(nomeWindow, WINDOW_AUTOSIZE);
+	imshow(nomeWindow, grfHistoEQ);
+
+}
 
 void geraHisto(string nomefoto){
 	vector<int> Rk;
 	vector<double> media;
+	vector<double> fdaFoto;
 	string localFoto = "./img/" + nomefoto;
 
 	Mat foto = imread(localFoto,CV_LOAD_IMAGE_GRAYSCALE );
@@ -21,20 +76,33 @@ void geraHisto(string nomefoto){
 		exit(0);
 	}
 
+	Mat fotoHisto(foto.rows,foto.cols,CV_LOAD_IMAGE_GRAYSCALE);
+	
 	for(int i = 0;i < 256; i++){
 		Rk.push_back(0);
 		media.push_back(0);
+		fdaFoto.push_back(0);
 	}
 
-	Mat fotoHisto(foto.rows,foto.cols,CV_LOAD_IMAGE_GRAYSCALE);
+
+	for(int linha = 0; linha < fotoHisto.rows;linha++){
+		for(int coluna = 0;coluna < fotoHisto.cols;coluna++){
+
+			Rk.at(foto.at<uchar>(linha,coluna))++;
+		}
+	}
 
 	for(int i = 0; i < 256; i++){
-	    if(i != 0) {
-	      media.at(i) = (int)(((Rk.at(i)*255)/(foto.rows * foto.cols)) + media.at(i-1));
+	    if(i == 0) {
+	      media.at(i) = (int)(((Rk.at(i)*255)/foto.total()));
 	    }else{
-	      media.at(i) = (int)(((Rk.at(i)*255)/(foto.rows * foto.cols)));
+	      media.at(i) = (int)(((Rk.at(i)*255)/foto.total()) + media.at(i-1));
 	    }
+
+      fdaFoto.at(i) = (Rk.at(i)/foto.total());
   	}
+
+
 
 	for(int linha = 0;linha < foto.rows;linha++){
 		for(int coluna = 0; coluna < foto.cols;coluna++){
@@ -50,6 +118,26 @@ void geraHisto(string nomefoto){
 
 	namedWindow("fotohisto",CV_WINDOW_AUTOSIZE);
 	imshow("fotohisto",fotoHisto);
+
+	//geracao do grafico do hsitograma para o terminal
+	geraGrfHisto(fotoHisto,"Novo");
+	geraGrfHisto(foto,"Original");
+
+	for(int i = 0;i < 256; i++){
+
+		if( i >= 100){
+			cout << i << " - ";
+		}else{
+			if(i >= 10){
+
+				cout << i<< "  - ";
+			}else{
+
+				cout << i<< "   - ";
+			}
+		}
+		cout << fdaFoto.at(i) << endl;
+	}
 
 	waitKey(0);
 }
@@ -71,7 +159,6 @@ void trans_power_law(string img, double fator) {
 	namedWindow("Original GrayScale", WINDOW_AUTOSIZE);
 	imshow("Original GrayScale", imagem_nova);
 
-	// Os três for's que iteram os pixels da imagem recebida
 	for (linha = 0; linha < imagem_nova.rows; ++linha) {
 		for (coluna = 0; coluna < imagem_nova.cols; ++coluna) {
 
@@ -88,7 +175,6 @@ void trans_power_law(string img, double fator) {
 	waitKey(0);
 
 }
-
 
 int main(){
 	
@@ -123,8 +209,9 @@ int main(){
 	cin >> fator;
 	getchar(); 
 
+	geraHisto(nomeFoto);
 
-
+/*
 	dec_int(nomeFoto,fator);
 
 	
@@ -137,7 +224,7 @@ int main(){
 	geraHisto(nomeFoto);
 
 	edge_imporv(dec_int(nomeFoto,fator));
-
+*/
 	destroyAllWindows();
 
 
