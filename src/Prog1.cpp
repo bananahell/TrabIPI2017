@@ -8,9 +8,10 @@ using namespace std;
 using namespace cv;
 
 
+
 void geraHisto(string nomefoto){
-	int Rk[256];
-	vector<float> media;
+	vector<int> Rk;
+	vector<double> media;
 	string localFoto = "./img/" + nomefoto;
 
 	Mat foto = imread(localFoto,CV_LOAD_IMAGE_GRAYSCALE );
@@ -20,60 +21,25 @@ void geraHisto(string nomefoto){
 		exit(0);
 	}
 
-
 	for(int i = 0;i < 256; i++){
-		Rk[i] = 0;
+		Rk.push_back(0);
+		media.push_back(0);
 	}
 
-	Mat fotoHisto(foto.rows,foto.cols,CV_LOAD_IMAGE_GRAYSCALE ,Scalar(0,0,0));
+	Mat fotoHisto(foto.rows,foto.cols,CV_LOAD_IMAGE_GRAYSCALE);
 
-	for(int i = 0;i < foto.rows;i++){
-		for(int j = 0; j < foto.cols;j++){
-			Rk[foto.at<uchar>(i,j)] += 1;
-		}
-	}
-
-	int index = 0;
-
-	for(int i = 0;i < 256;i++){
-		if(Rk[i] != 0){
-
-			media.push_back((float)Rk[i]/(float)foto.total());
-			
-			cout << i << "index - " << index << " - " << media.at(index) << " - " << Rk[i] << endl;
-			index++;
-		}
-	}
-	int i  = 0;
-	float mediaAux = 0;
-	double fractpart,intpart;
-
-	cout << foto.total() <<  endl;
+	for(int i = 0; i < 256; i++){
+	    if(i != 0) {
+	      media.at(i) = (int)(((Rk.at(i)*255)/(foto.rows * foto.cols)) + media.at(i-1));
+	    }else{
+	      media.at(i) = (int)(((Rk.at(i)*255)/(foto.rows * foto.cols)));
+	    }
+  	}
 
 	for(int linha = 0;linha < foto.rows;linha++){
 		for(int coluna = 0; coluna < foto.cols;coluna++){
 
-			mediaAux = 0;
-			//for(int i = 0;i < index;i++){
-				i = 0;
-				for(int j = 0;j < 256;j++){
-					
-					if(Rk[j] != 0){
-
-						mediaAux = (float)(media.at(i) * 255); 
-						cout << j << "index - " << i << " - " << media.at(i) << " - " << Rk[j] << endl;
-
-						i++; 
-					}
-		
-					fractpart = modf(mediaAux,&intpart);
-					if(fractpart >= 0.5){
-						intpart += 1;
-					}
-
-					fotoHisto.at<uchar>(linha,coluna) = intpart;
-				}
-			//}
+			fotoHisto.at<uchar>(linha,coluna) = media.at(foto.at<uchar>(linha,coluna));
 		}
 	}
 
@@ -87,6 +53,42 @@ void geraHisto(string nomefoto){
 
 	waitKey(0);
 }
+
+void trans_power_law(string img, double fator) {
+
+	string local ="./img/" + img;
+
+	Mat imagem_nova = imread(local, CV_LOAD_IMAGE_GRAYSCALE);
+	double pixel;
+	int linha, coluna;
+	double corretor = pow(255, fator-1);
+
+	if(!imagem_nova.data){
+		cout << "imagem nao encontrada" << endl;
+		exit(0);
+	}
+
+	namedWindow("Original GrayScale", WINDOW_AUTOSIZE);
+	imshow("Original GrayScale", imagem_nova);
+
+	// Os três for's que iteram os pixels da imagem recebida
+	for (linha = 0; linha < imagem_nova.rows; ++linha) {
+		for (coluna = 0; coluna < imagem_nova.cols; ++coluna) {
+
+		  pixel = pow(imagem_nova.at<uchar>(linha, coluna), fator)/corretor;
+
+		  imagem_nova.at<uchar>(linha, coluna) = (int)(pixel);
+
+		}
+	}
+
+	namedWindow("Power Law", WINDOW_AUTOSIZE);
+	imshow("Power Law", imagem_nova);
+
+	waitKey(0);
+
+}
+
 
 int main(){
 	
@@ -110,14 +112,31 @@ int main(){
 
 	edge_imporv(imgMenor);
 */
+
 	string nomeFoto;
 	cout << "Digite o nome da imagem" << endl;
 	cin >> nomeFoto;
 	getchar(); 
 
+	int fator;
+	cout << "Digite o fator" << endl;
+	cin >> fator;
+	getchar(); 
+
+
+
+	dec_int(nomeFoto,fator);
+
+	
+	for(double fator = 1;fator > 0 ; fator = fator - 0.1){
+
+		trans_power_law(nomeFoto,fator);
+
+ 	}
+
 	geraHisto(nomeFoto);
 
-	//edge_imporv(nomeFoto);
+	edge_imporv(dec_int(nomeFoto,fator));
 
 	destroyAllWindows();
 
