@@ -6,9 +6,9 @@
 # ObjDIR = *.o DIR
 # LibDIR = lib DIR
 # LibDIR -> enable when using, put $(LIBS) at end of gogo's command
-LibDIREC =./lib/
-LibDIR =./lib/ /home/user/gtest-1.7.0/include /home/user/gtest-1.7.0/lib/.libs/libgtest.a /usr/local/include/opencv2
-IncludeDIR =./include/
+LibDIREC=./lib/
+LibDIR=./lib/ /home/user/gtest-1.7.0/include /home/user/gtest-1.7.0/lib/.libs/libgtest.a /usr/local/include/opencv2
+IncludeDIR=./include/
 CcDIR=./src/
 ObjDIR=./src/obj/
 CC=g++

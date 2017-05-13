@@ -2,7 +2,78 @@
 #include <string>
 
 using namespace std;
+using namespace cv;
 
+//funcao que gera o grafico da imagem com histograma equalizado
+void geraGraficoHist(string nomeFoto){
+  Mat src,dst;
+
+  String local = "./img/" + nomeFoto;
+  src = imread(local, CV_LOAD_IMAGE_COLOR);
+
+  if( !src.data ){
+    printf("imagem nao encontrada\n");
+    exit(0); 
+  }
+
+  /// Separate the image in 3 places ( B, G and R )
+  vector<Mat> bgr_planes;
+  split( src, bgr_planes );
+
+  /// Establish the number of bins
+  int histSize = 256;
+
+  /// Set the ranges ( for B,G,R) )
+  float range[] = { 0, 256 } ;
+  const float* histRange = { range };
+
+  bool uniform = true; bool accumulate = false;
+
+  Mat b_hist, g_hist, r_hist;
+
+  /// Compute the histograms:
+  calcHist( &bgr_planes[0], 1, 0, Mat(), b_hist, 1, &histSize, &histRange, uniform, accumulate );
+  calcHist( &bgr_planes[1], 1, 0, Mat(), g_hist, 1, &histSize, &histRange, uniform, accumulate );
+  calcHist( &bgr_planes[2], 1, 0, Mat(), r_hist, 1, &histSize, &histRange, uniform, accumulate );
+
+  // Draw the histograms for B, G and R
+  int hist_w = 512; int hist_h = 400;
+  int bin_w = cvRound( (double) hist_w/histSize );
+
+  Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 255,255,255) );
+
+  /// Normalize the result to [ 0, histImage.rows ]
+  normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+  normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+  normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+
+  /// Draw for each channel
+  for( int i = 1; i < histSize; i++ )
+  {
+  line( histImage, Point( bin_w*(i-1), hist_h - cvRound(b_hist.at<float>(i-1)) ) ,
+           Point( bin_w*(i), hist_h - cvRound(b_hist.at<float>(i)) ),
+           Scalar( 255, 0, 0), 2, 8, 0  );
+  line( histImage, Point( bin_w*(i-1), hist_h - cvRound(g_hist.at<float>(i-1)) ) ,
+           Point( bin_w*(i), hist_h - cvRound(g_hist.at<float>(i)) ),
+           Scalar( 0, 255, 0), 2, 8, 0  );
+  line( histImage, Point( bin_w*(i-1), hist_h - cvRound(r_hist.at<float>(i-1)) ) ,
+           Point( bin_w*(i), hist_h - cvRound(r_hist.at<float>(i)) ),
+           Scalar( 0, 0, 255), 2, 8, 0  );
+  }
+
+  /// Display
+  namedWindow(nomeFoto, CV_WINDOW_AUTOSIZE );
+  imshow(nomeFoto, histImage );
+
+  string localgrf = "./img/grf" + nomeFoto;  
+  imwrite(localgrf,histImage);
+
+  cout << nomeFoto << endl;
+
+  waitKey(0);
+}
+
+//funcao que diminui e interpola a imagem
 Mat dec_int(string nomeFoto,int fator){
   stringstream stream;
   string strfator;
@@ -50,20 +121,6 @@ Mat dec_int(string nomeFoto,int fator){
     }
   }
 
-  /*for (int i = 0; i < imgDim.rows; ++i ) {
-    for( int j = 0; j < imgDim.cols; ++j ) {
-      for (int c = 0; c < 3; ++c) {
-        imgInt.at<Vec3b>(i*fator, j*fator) = imgDim.at<Vec3b>(i, j);
-        for (int d = 0; d < fator; ++d) {
-          for (int c = 0; c < fator; ++c) {
-            imgInt.at<Vec3b>((i*fator) + d, (j*fator) + c) = imgInt.at<Vec3b>(i*fator, j*fator);
-          }
-        }
-      }
-    }
-  }
-*/
-
   namedWindow("Dim",WINDOW_AUTOSIZE);
   imshow("Dim",imgDim);
 
@@ -71,31 +128,26 @@ Mat dec_int(string nomeFoto,int fator){
 
   stream << fator;
   strfator = stream.str();
-  string nomeInt = "Interpolada" + strfator;
+  string nomeInt = "interpolada" + strfator;
   namedWindow(nomeInt,WINDOW_AUTOSIZE);
   imshow(nomeInt,imgInt);
 
+  string localInt = "./img/Int" + strfator + nomeFoto;
+  string localDim = "./img/Dim" + strfator + nomeFoto;  
+
+  imwrite(localInt,imgInt);
+  imwrite(localDim,imgDim);
 
   waitKey(0);
 
-  /*destroyWindow("Dim");
-  destroyWindow("Original");
-  destroyWindow("Interpolada");
-
-  imgOri.release();
-  imgInt.release();
-  imgDim.release();
-
-*/
   destroyAllWindows();
   return imgInt;
 }
 
-
-void edge_imporv(string nomearq){
+void edge_imporv(string nomeFoto){
   srand(time(NULL));
 
-  string localFoto = "./img/" + nomearq;
+  string localFoto = "./img/" + nomeFoto;
   Mat imgOriginal = imread(localFoto, CV_LOAD_IMAGE_COLOR);
 
 
@@ -257,10 +309,13 @@ void edge_imporv(string nomearq){
   namedWindow("Filtrada",WINDOW_AUTOSIZE);
   imshow("Filtrada",imgfiltrada);
 
+  string localfilt = "./img/Filt" + nomeFoto;
+  imwrite(localfilt,imgfiltrada);
+
   waitKey(0);
 }
 
-
+//funcao que gera a imagem com um filtro passa-baixas
 void edge_imporv(Mat imgEntrada){
   srand(time(NULL));
 
@@ -269,15 +324,15 @@ void edge_imporv(Mat imgEntrada){
 
   Mat imgfiltro(3,3,CV_8UC3,Scalar(0,0,0));
 
-//inicializa a matriz filtro
-for(int i = 0;i < 3;i++){
-  for(int j = 0; j < 3; j++){
-    for(int c = 0; c < 3;c++){
+  //inicializa a matriz filtro
+  for(int i = 0;i < 3;i++){
+    for(int j = 0; j < 3; j++){
+      for(int c = 0; c < 3;c++){
 
-      imgfiltro.at<Vec3b>(i,j)[c] = 1;
-    }
-  }  
-}
+        imgfiltro.at<Vec3b>(i,j)[c] = 1;
+      }
+    }  
+  }
 
   Mat imgfiltrada(imgEntrada.rows,imgEntrada.cols,CV_8UC3,Scalar(0,0,0));
 
@@ -406,11 +461,11 @@ for(int i = 0;i < 3;i++){
   namedWindow("Filtrada",WINDOW_AUTOSIZE);
   imshow("Filtrada",imgfiltrada);
 
-waitKey(0);
+  waitKey(0);
 
 }
 
-
+//funcao que eu criei para fazer o grafico
 void geraGrfHisto(Mat fotoHisto,string nomeFoto){
 
   vector<int> histoEQ;
@@ -467,10 +522,12 @@ void geraGrfHisto(Mat fotoHisto,string nomeFoto){
 
 }
 
+//funcao que gera a imagem com o histograma equalizado
 void geraHisto(string nomefoto){
-  vector<int> Rk;
-  vector<double> media;
-  vector<float> fdaFoto;
+  vector<int>     Rk;
+  vector<double>  media;
+  vector<float>   fdaFoto;
+
   string localFoto = "./img/" + nomefoto;
 
   Mat foto = imread(localFoto,CV_LOAD_IMAGE_GRAYSCALE );
@@ -488,7 +545,7 @@ void geraHisto(string nomefoto){
     fdaFoto.push_back(0.0);
   }
 
-  for(int linha = 0; linha < fotoHisto.rows;linha++){
+  for(int linha = 0;linha < fotoHisto.rows;linha++){
     for(int coluna = 0;coluna < fotoHisto.cols;coluna++){
 
       Rk.at(foto.at<uchar>(linha,coluna))++;
@@ -519,12 +576,8 @@ void geraHisto(string nomefoto){
   namedWindow("fotohisto",CV_WINDOW_AUTOSIZE);
   imshow("fotohisto",fotoHisto);
 
-  //geracao do grafico do hsitograma para o terminal
-  geraGrfHisto(fotoHisto,"Novo");
-  geraGrfHisto(foto,"Original");
-
   //geracao funcao de densidade acumulada ->nao funciona ainda :/
-  for(int i = 0;i < 256; i++){
+  /*for(int i = 0;i < 256; i++){
 
     if( i >= 100){
       cout << i << " - ";
@@ -538,14 +591,20 @@ void geraHisto(string nomefoto){
       }
     }
     printf("%.7f\n",fdaFoto.at(i));
-  }
+  }*/
 
+  //waitKey(0);
+
+  string localNovaFoto = "./img/hist" + nomefoto; 
+
+  imwrite(localNovaFoto,fotoHisto);
   waitKey(0);
 }
 
-void power_law(string img, double fator) {
+//funcao que gera uma imagem com filtro powerlaw
+void powerLaw(string nomeFoto, double fator) {
 
-  string local ="./img/" + img;
+  string local ="./img/" + nomeFoto;
 
   Mat imagem_nova = imread(local, CV_LOAD_IMAGE_GRAYSCALE);
   double pixel;
@@ -571,6 +630,10 @@ void power_law(string img, double fator) {
 
   namedWindow("Power Law", WINDOW_AUTOSIZE);
   imshow("Power Law", imagem_nova);
+
+  string localNovaFoto = "./img/PL" + nomeFoto; 
+
+  imwrite(localNovaFoto,imagem_nova);
 
   waitKey(0);
 }

@@ -29,33 +29,39 @@ int main(){
 
 	edge_imporv(imgMenor);
 */
-
-	string nomeFoto;
+	/*string nomeFoto;
 	cout << "Digite o nome da imagem" << endl;
 	cin >> nomeFoto;
 	getchar(); 
 
-	/*int fator;
+	int fator;
 	cout << "Digite o fator" << endl;
 	cin >> fator;
 	getchar(); 
 */
-	geraHisto(nomeFoto);
+	//dec_int(nomeFoto,fator);
+	//edge_imporv(nomeFoto);
 
-/*
-	dec_int(nomeFoto,fator);
-
+	geraHisto("university.png");
+	//geraGraficoHist(nomeFoto);
 	
-	for(double fator = 1;fator > 0 ; fator = fator - 0.1){
+	//string nomeHistFoto = "hist" + nomeFoto;
+	
+	geraGraficoHist("university.png");
+	geraGraficoHist("histuniversity.png");
+	//dec_int(nomeFoto,fator);
 
-		power_law(nomeFoto,fator);
 
- 	}
+	//powerLaw("university.png",0.5);
 
-	geraHisto(nomeFoto);
+	/*for(double fator = 2;fator > 0 ; fator -= 0.1){
 
-	edge_imporv(dec_int(nomeFoto,fator));
-*/
+		powerLaw(nomeFoto,fator);
+
+ 	}*/
+
+	//edge_imporv(dec_int(nomeFoto,fator));
+
 	destroyAllWindows();
 
 

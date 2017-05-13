@@ -14,4 +14,6 @@ void geraGrfHisto(Mat fotoHisto,string nomeFoto);
 
 void geraHisto(string nomefoto);
 
-void power_law(string img, double fator);
+void powerLaw(string img, double fator);
+
+void geraGraficoHist(string nomeFoto);
