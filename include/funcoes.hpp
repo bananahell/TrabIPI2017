@@ -9,3 +9,9 @@ Mat dec_int(string nomeFoto,int fator);
 void edge_imporv(string nomearq);
 
 void edge_imporv(Mat imgEntrada);
+
+void geraGrfHisto(Mat fotoHisto,string nomeFoto);
+
+void geraHisto(string nomefoto);
+
+void power_law(string img, double fator);
