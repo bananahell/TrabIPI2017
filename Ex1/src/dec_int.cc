@@ -25,6 +25,10 @@ void dec_int(string img_entrada, int fator) {
     return;
   }
 
+  stringstream stream;
+  stream << fator;
+  string fator_string = stream.str();
+
   namedWindow("Original", WINDOW_AUTOSIZE);
   imshow("Original", imagem_orig);
 
@@ -37,9 +41,11 @@ void dec_int(string img_entrada, int fator) {
   }
 
   string img_menor = img_entrada;
-  char *fator_string;
-  img_menor.insert(img_menor.find_last_of('.'), itoa(fator, fator_string, 10));
+  img_menor.insert(img_menor.find_last_of('/'), "/ex1");
+  img_menor.insert(img_menor.find_last_of('.'), "_menor_");
+  img_menor.insert(img_menor.find_last_of('.'), fator_string);
   imwrite(img_menor, imagem_menor);
+  cout << img_menor << endl;
   namedWindow("Menor", WINDOW_AUTOSIZE);
   imshow("Menor", imagem_menor);
 
@@ -56,10 +62,16 @@ void dec_int(string img_entrada, int fator) {
     }
   }
 
-  imwrite("./img/ex1/borrada.jpg", imagem_result);
-  namedWindow("Borrada", WINDOW_AUTOSIZE);
-  imshow("Borrada", imagem_result);
+  string img_result = img_entrada;
+  img_result.insert(img_result.find_last_of('/'), "/ex1");
+  img_result.insert(img_result.find_last_of('.'), "_quadriculada_");
+  img_result.insert(img_result.find_last_of('.'), fator_string);
+  imwrite(img_result, imagem_result);
+  cout << img_result << endl;
+  namedWindow("Quadriculada", WINDOW_AUTOSIZE);
+  imshow("Quadriculada", imagem_result);
 
   waitKey(0);
+  destroyAllWindows();
 
 }

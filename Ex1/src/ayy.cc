@@ -7,6 +7,77 @@
 using namespace std;
 using namespace cv;
 
+//funcao que diminui e interpola a imagem
+Mat dec_int(string nomeFoto,int fator){
+  stringstream stream;
+  string strfator;
+  string localFoto = "./img/" + nomeFoto;
+  
+  Mat imgOri = imread(localFoto, CV_LOAD_IMAGE_COLOR);
+
+
+  if (!imgOri.data) {
+    cout << "No image data" << endl;
+    exit(0);//refazer isso aqui, eh feio
+  }
+ 
+  stream << fator;
+  strfator = stream.str();
+  string nomeOriginal = "Original " + strfator;
+  namedWindow(nomeOriginal,WINDOW_AUTOSIZE);
+  imshow(nomeOriginal,imgOri);
+
+  Mat imgDim(imgOri.rows/fator,imgOri.cols/fator,CV_8UC3,Scalar(0,0,0));
+  Mat imgInt(imgOri.rows,imgOri.cols,CV_8UC3,Scalar(0,0,0));
+
+  //diminuicao da imagem
+  for(int i = 0; i < imgOri.rows; i+=fator){
+    for(int j = 0; j < imgOri.cols; j+=fator){
+      for(int c = 0;c < 3; c++){
+
+        imgDim.at<Vec3b>(i/fator,j/fator) = imgOri.at<Vec3b>(i,j); 
+      }
+    }
+  }
+
+  //interpolacao da imagem a partir da foto diminuida
+  for(int i = 0; i < imgOri.rows; i+=fator){
+    for(int j = 0; j < imgOri.cols; j+=fator){
+      for(int cor = 0; cor < 3; cor++){
+        for(int d = 0; d < fator; d++){
+          for(int c = 0;c < fator; c++){          
+
+            imgInt.at<Vec3b>(i+d,j+c) = imgDim.at<Vec3b>(i/fator,j/fator); 
+            
+          }
+        }
+      }
+    }
+  }
+
+  namedWindow("Dim",WINDOW_AUTOSIZE);
+  imshow("Dim",imgDim);
+
+  stream.str(" ");
+
+  stream << fator;
+  strfator = stream.str();
+  string nomeInt = "interpolada" + strfator;
+  namedWindow(nomeInt,WINDOW_AUTOSIZE);
+  imshow(nomeInt,imgInt);
+
+  string localInt = "./img/Int" + strfator + nomeFoto;
+  string localDim = "./img/Dim" + strfator + nomeFoto;  
+
+  imwrite(localInt,imgInt);
+  imwrite(localDim,imgDim);
+
+  waitKey(0);
+
+  destroyAllWindows();
+  return imgInt;
+}
+
 
 double pixelDistance(double u, double v)
 {

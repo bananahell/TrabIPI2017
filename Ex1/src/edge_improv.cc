@@ -12,67 +12,28 @@
 
 void edge_improv(string img_entrada) {
 
-  Mat imagem_borrada;
-  imagem_borrada = imread(img_entrada, CV_LOAD_IMAGE_COLOR);
-
-  if (!imagem_borrada.data) {
-    cout << "No image data" << endl;
-    return;
-  }
-
-  Mat imagem_filtrada_custom(imagem_borrada.rows, imagem_borrada.cols, CV_8UC3, Scalar(0,0,0));
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 3);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 5);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 7);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 9);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 11);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
-
-  imagem_filtrada_custom = filtro_custom(imagem_borrada, 2);
-
-  imwrite("./img/filtrada.jpg", imagem_filtrada_custom);
-  namedWindow("Filtrada", WINDOW_AUTOSIZE);
-  imshow("Filtrada", imagem_filtrada_custom);
-
-  waitKey(0);
+  filtro_media(img_entrada, 5);
 
 }
 
-Mat filtro_custom(Mat img, int fator) {
+void filtro_media(string img_entrada, int fator) {
+
+  if (fator %  2 == 0) {
+    cout << "Fator de filtro de média da imagem deve ser ímpar. Retornando com erro." << endl;
+    return;
+  }
+
+  Mat img;
+  img = imread(img_entrada, CV_LOAD_IMAGE_COLOR);
+
+  if (!img.data) {
+    cout << "Imagem " << img_entrada << " não encontrada. Retornando com erro." << endl;
+    return;
+  }
+
+  stringstream stream;
+  stream << fator;
+  string fator_string = stream.str();
 
   int row, col;
   int chn;
@@ -82,9 +43,6 @@ Mat filtro_custom(Mat img, int fator) {
   bool row_menor_aval, row_maior_aval;
   bool col_menor_aval, col_maior_aval;
   Mat imagem_nova(img.rows, img.cols, CV_8UC3, Scalar(0,0,0));
-  if (fator %  2 == 0) {
-    return imagem_nova;
-  }
 
   // Os três for's que iteram os pixels da imagem recebida
   for (row = 0; row < img.rows; ++row) {
@@ -170,6 +128,15 @@ Mat filtro_custom(Mat img, int fator) {
     }
   }
 
-  return imagem_nova;
+  string img_filtrada = img_entrada;
+  img_filtrada.insert(img_filtrada.find_last_of('.'), "_filtro_media_");
+  img_filtrada.insert(img_filtrada.find_last_of('.'), fator_string);
+  imwrite(img_filtrada, imagem_nova);
+  cout << img_filtrada << endl;
+  namedWindow("Filtrada", WINDOW_AUTOSIZE);
+  imshow("Filtrada", imagem_nova);
+
+  waitKey(0);
+  destroyAllWindows();
 
 }

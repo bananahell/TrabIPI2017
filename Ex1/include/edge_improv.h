@@ -33,4 +33,4 @@ void edge_improv(string img_entrada);
  * @param fator - Dimensões do kernel quadrado a ser utilizado na filtragem
  *
  */
-Mat filtro_custom(Mat img, int fator);
+void filtro_media(string img_entrada, int fator);

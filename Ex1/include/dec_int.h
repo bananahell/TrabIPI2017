@@ -8,6 +8,7 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <cstdlib>
 #include <opencv2/opencv.hpp>
