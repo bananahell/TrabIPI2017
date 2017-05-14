@@ -25,4 +25,4 @@ using namespace cv;
  * @param fator - Fator usado para multiplicar as dimensões dos pixels
  *
  */
-void dec_int(string img_entrada, int fator);
+Mat dec_int(string img_entrada, int fator);

@@ -10,19 +10,21 @@
 #include <dec_int.h>
 
 
-void dec_int(string img_entrada, int fator) {
-
-  if (fator % 2 != 0) {
-    cout << "Fator de expansão da imagem deve ser par. Retornando com erro." << endl;
-    return;
-  }
+Mat dec_int(string img_entrada, int fator) {
 
   Mat imagem_orig;
   imagem_orig = imread(img_entrada, CV_LOAD_IMAGE_COLOR);
 
+  Mat imagem_menor(imagem_orig.rows/fator, imagem_orig.cols/fator, CV_8UC3, Scalar(0,0,0));
+
   if (!imagem_orig.data) {
     cout << "Imagem " << img_entrada << " não encontrada. Retornando com erro." << endl;
-    return;
+    return imagem_menor;
+  }
+
+  if (fator % 2 != 0) {
+    cout << "Fator de expansão da imagem deve ser par. Retornando com erro." << endl;
+    return imagem_menor;
   }
 
   stringstream stream;
@@ -31,8 +33,6 @@ void dec_int(string img_entrada, int fator) {
 
   namedWindow("Original", WINDOW_AUTOSIZE);
   imshow("Original", imagem_orig);
-
-  Mat imagem_menor(imagem_orig.rows/fator, imagem_orig.cols/fator, CV_8UC3, Scalar(0,0,0));
 
   for( int y = 0; y < imagem_orig.rows; y+=fator ) {
     for( int x = 0; x < imagem_orig.cols; x+=fator ) {
@@ -73,5 +73,7 @@ void dec_int(string img_entrada, int fator) {
 
   waitKey(0);
   destroyAllWindows();
+
+  return imagem_result;
 
 }

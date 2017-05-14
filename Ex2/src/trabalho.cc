@@ -13,8 +13,6 @@
 /**
  * @brief Main do programa.
  *
- * Mostra imagens bonitinhas.
- *
  */
 int main() {
 
