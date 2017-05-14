@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dec__int_8h" kind="file" language="C++">
+    <compoundname>dec_int.h</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">opencv2/opencv.hpp</includes>
+    <includedby refid="dec__int_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/dec_int.cc</includedby>
+    <includedby refid="trabalho_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/trabalho.cc</includedby>
+    <incdepgraph>
+      <node id="24">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="22">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/dec_int.h</label>
+        <link refid="dec_int.h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="26">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/dec_int.cc</label>
+        <link refid="dec__int_8cc"/>
+      </node>
+      <node id="27">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/trabalho.cc</label>
+        <link refid="trabalho_8cc"/>
+      </node>
+      <node id="25">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/dec_int.h</label>
+        <link refid="dec_int.h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacestd">std</innernamespace>
+    <innernamespace refid="namespacecv">cv</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="dec__int_8h_1a1f3ef8f4ca93e37c2792f730a39c41f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dec_int</definition>
+        <argsstring>(char *img_entrada, int fator)</argsstring>
+        <name>dec_int</name>
+        <param>
+          <type>char *</type>
+          <declname>img_entrada</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fator</declname>
+        </param>
+        <briefdescription>
+<para>Quadriculador de imagens. </para>        </briefdescription>
+        <detaileddescription>
+<para>Multiplica as dimensões de cada pixel de uma imagem por um fator.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>img_entrada</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Imagem a ser expandida </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Fator usado para multiplicar as dimensões dos pixels </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/dec_int.h" line="25" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/dec_int.cc" bodystart="13" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Arquivo que contém a biblioteca de <ref refid="dec__int_8cc" kindref="compound">dec_int.cc</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para>Arquivo que contém a biblioteca de <ref refid="edge__improv_8cc" kindref="compound">edge_improv.cc</ref>.</para><para><simplesect kind="author"><para>Pedro Nogueira - 14/0065032 </para></simplesect>
+</para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="10"><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/opencv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacestd" kindref="compound">std</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacecv" kindref="compound">cv</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dec__int_8h_1a1f3ef8f4ca93e37c2792f730a39c41f4" kindref="member">dec_int</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*img_entrada,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fator);</highlight></codeline>
+    </programlisting>
+    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/dec_int.h"/>
+  </compounddef>
+</doxygen>

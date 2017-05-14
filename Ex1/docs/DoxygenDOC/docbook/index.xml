@@ -10,10 +10,15 @@
     </chapter>
     <chapter>
         <title>File Documentation</title>
+        <xi:include href="dec__int_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="edge__improv_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dec__int_8cc.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="edge__improv_8cc.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
         <xi:include href="trabalho_8cc.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     </chapter>
     <chapter>
         <title>Directory Documentation</title>
+        <xi:include href="dir_d44c64559bbebec7f509842c48db8b23.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
         <xi:include href="dir_68267d1309a1af8e8297ef4c3efbcdba.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     </chapter>
 </book>

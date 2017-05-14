@@ -1,7 +1,7 @@
 /**
  * @file trabalho.cc
  * 
- * @brief Arquivo que vai rodar opencv lindão
+ * @brief Arquivo do primeiro exercício do primeiro trabalho de IPI UnB - 1/2017
  *
  * @author Pedro Nogueira - 14/0065032
  *

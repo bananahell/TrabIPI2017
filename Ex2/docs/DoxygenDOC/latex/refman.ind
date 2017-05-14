@@ -1,0 +1,35 @@
+\begin{theindex}
+
+  \item {/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdu\IeC {\c c}\IeC {\~a}o ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/include/realces.\+h}, 
+		\hyperpage{3}
+  \item {/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdu\IeC {\c c}\IeC {\~a}o ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/src/realces.\+cc}, 
+		\hyperpage{5}
+  \item {/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdu\IeC {\c c}\IeC {\~a}o ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/src/trabalho.\+cc}, 
+		\hyperpage{6}
+
+  \indexspace
+
+  \item {main}
+    \subitem {trabalho.\+cc}, \hyperpage{7}
+
+  \indexspace
+
+  \item {realces.\+cc}
+    \subitem {trans\+\_\+hist}, \hyperpage{6}
+    \subitem {trans\+\_\+power\+\_\+law}, \hyperpage{6}
+  \item {realces.\+h}
+    \subitem {trans\+\_\+hist}, \hyperpage{4}
+    \subitem {trans\+\_\+power\+\_\+law}, \hyperpage{4}
+
+  \indexspace
+
+  \item {trabalho.\+cc}
+    \subitem {main}, \hyperpage{7}
+  \item {trans\+\_\+hist}
+    \subitem {realces.\+cc}, \hyperpage{6}
+    \subitem {realces.\+h}, \hyperpage{4}
+  \item {trans\+\_\+power\+\_\+law}
+    \subitem {realces.\+cc}, \hyperpage{6}
+    \subitem {realces.\+h}, \hyperpage{4}
+
+\end{theindex}

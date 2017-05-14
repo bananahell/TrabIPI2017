@@ -4,9 +4,25 @@
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
+  <compound refid="dec__int_8h" kind="file"><name>dec_int.h</name>
+    <member refid="dec__int_8h_1a1f3ef8f4ca93e37c2792f730a39c41f4" kind="function"><name>dec_int</name></member>
+  </compound>
+  <compound refid="edge__improv_8h" kind="file"><name>edge_improv.h</name>
+    <member refid="edge__improv_8h_1a1d9523296c50125bb44075648d8bcec8" kind="function"><name>edge_improv</name></member>
+    <member refid="edge__improv_8h_1a81158f20cd9c7531e20ef6acc7852bee" kind="function"><name>filtro_custom</name></member>
+  </compound>
+  <compound refid="dec__int_8cc" kind="file"><name>dec_int.cc</name>
+    <member refid="dec__int_8cc_1a1f3ef8f4ca93e37c2792f730a39c41f4" kind="function"><name>dec_int</name></member>
+  </compound>
+  <compound refid="edge__improv_8cc" kind="file"><name>edge_improv.cc</name>
+    <member refid="edge__improv_8cc_1a1d9523296c50125bb44075648d8bcec8" kind="function"><name>edge_improv</name></member>
+    <member refid="edge__improv_8cc_1a81158f20cd9c7531e20ef6acc7852bee" kind="function"><name>filtro_custom</name></member>
+  </compound>
   <compound refid="trabalho_8cc" kind="file"><name>trabalho.cc</name>
     <member refid="trabalho_8cc_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
   </compound>
-  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src</name>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src</name>
   </compound>
 </doxygenindex>

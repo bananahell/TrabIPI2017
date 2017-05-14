@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="edge__improv_8h" kind="file" language="C++">
+    <compoundname>edge_improv.h</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">opencv2/opencv.hpp</includes>
+    <includedby refid="edge__improv_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/edge_improv.cc</includedby>
+    <includedby refid="trabalho_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/trabalho.cc</includedby>
+    <incdepgraph>
+      <node id="30">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="29">
+        <label>iostream</label>
+      </node>
+      <node id="28">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/edge_improv.h</label>
+        <link refid="edge_improv.h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="32">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/edge_improv.cc</label>
+        <link refid="edge__improv_8cc"/>
+      </node>
+      <node id="33">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/trabalho.cc</label>
+        <link refid="trabalho_8cc"/>
+      </node>
+      <node id="31">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/edge_improv.h</label>
+        <link refid="edge_improv.h"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="edge__improv_8h_1a1d9523296c50125bb44075648d8bcec8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void edge_improv</definition>
+        <argsstring>(char *img_entrada)</argsstring>
+        <name>edge_improv</name>
+        <param>
+          <type>char *</type>
+          <declname>img_entrada</declname>
+        </param>
+        <briefdescription>
+<para>Interface para o usuário ter acesso às ferramentas de melhoria subjetiva de uma imagem. </para>        </briefdescription>
+        <detaileddescription>
+<para>Somente contém as opções de filtros que o usuário pode utilizar na imagem. Sujeito a expansão.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>img_entrada</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Imagem a ser manipulada </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/edge_improv.h" line="24" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/edge_improv.cc" bodystart="13" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="edge__improv_8h_1a81158f20cd9c7531e20ef6acc7852bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Mat</type>
+        <definition>Mat filtro_custom</definition>
+        <argsstring>(Mat img, int fator)</argsstring>
+        <name>filtro_custom</name>
+        <param>
+          <type>Mat</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fator</declname>
+        </param>
+        <briefdescription>
+<para>Filtro de média. </para>        </briefdescription>
+        <detaileddescription>
+<para>Aplicação do filtro de média de imagens.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>img</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Imagem a ser filtrada </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Dimensões do kernel quadrado a ser utilizado na filtragem </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/edge_improv.h" line="35" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/edge_improv.cc" bodystart="75" bodyend="175"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="10"><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/opencv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacestd" kindref="compound">std</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacecv" kindref="compound">cv</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="edge__improv_8cc_1a1d9523296c50125bb44075648d8bcec8" kindref="member">edge_improv</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*img_entrada);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">Mat<sp/><ref refid="edge__improv_8cc_1a81158f20cd9c7531e20ef6acc7852bee" kindref="member">filtro_custom</ref>(Mat<sp/>img,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fator);</highlight></codeline>
+    </programlisting>
+    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/include/edge_improv.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="trabalho_8cc" kind="file" language="C++">
+    <compoundname>trabalho.cc</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">opencv2/opencv.hpp</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/trabalho.cc</label>
+        <link refid="trabalho.cc"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacestd">std</innernamespace>
+    <innernamespace refid="namespacecv">cv</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trabalho_8cc_1ae66f6b31b5ad750f1fe042a706a4e3d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+<para>Main do programa. </para>        </briefdescription>
+        <detaileddescription>
+<para>Mostra imagens bonitinhas. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/trabalho.cc" line="23" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/trabalho.cc" bodystart="23" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Arquivo que vai rodar opencv lindão. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Pedro Nogueira - 14/0065032 </para></simplesect>
+</para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="10"><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/opencv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacestd" kindref="compound">std</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacecv" kindref="compound">cv</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="trabalho_8cc_1ae66f6b31b5ad750f1fe042a706a4e3d4" kindref="member">main</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>Mat<sp/>image;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>img_entrada[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;./img/car.png&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>image<sp/>=<sp/>imread(img_entrada,<sp/>CV_LOAD_IMAGE_GRAYSCALE);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!image.data)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;No<sp/>image<sp/>data&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>endl;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>namedWindow(</highlight><highlight class="stringliteral">&quot;Display<sp/>Image&quot;</highlight><highlight class="normal">,<sp/>WINDOW_AUTOSIZE);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>imshow(</highlight><highlight class="stringliteral">&quot;Display<sp/>Image&quot;</highlight><highlight class="normal">,<sp/>image);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>waitKey(0);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/trabalho.cc"/>
+  </compounddef>
+</doxygen>

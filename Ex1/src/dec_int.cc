@@ -1,7 +1,7 @@
 /**
  * @file dec_int.cc
  * 
- * @brief Arquivo que vai rodar opencv lindão
+ * @brief Arquivo que expande os pixels de uma imagem
  *
  * @author Pedro Nogueira - 14/0065032
  *
@@ -10,7 +10,7 @@
 #include <dec_int.h>
 
 
-void dec_int(char *img_entrada,  int fator) {
+void dec_int(char *img_entrada, int fator) {
 
   Mat imagem_orig;
 

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="dir_68267d1309a1af8e8297ef4c3efbcdba">
-    <title>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src Directory Reference</title>
-<para>Directory dependency diagram for /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src</para>
+    <title>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src Directory Reference</title>
+<para>Directory dependency diagram for /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src</para>
 <para>
     <figure>
         <title>Directory Dependency diagram</title>
@@ -17,6 +17,13 @@
             <para>
                 <itemizedlist>
                     <listitem>
+                        <para>file <link linkend="realces_8cc">realces.cc</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
                         <para>file <link linkend="trabalho_8cc">trabalho.cc</link></para>
                     </listitem>
                 </itemizedlist>
@@ -24,6 +31,6 @@
         </simplesect>
     <simplesect>
         <title>Detailed Description</title>
-    <para>Directory location is /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/</para>
+    <para>Directory location is /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/</para>
     </simplesect>
 </section>

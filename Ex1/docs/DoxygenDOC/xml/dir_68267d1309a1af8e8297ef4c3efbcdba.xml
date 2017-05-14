@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
-    <compoundname>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src</compoundname>
+    <compoundname>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src</compoundname>
+    <innerfile refid="dec__int_8cc">dec_int.cc</innerfile>
+    <innerfile refid="edge__improv_8cc">edge_improv.cc</innerfile>
     <innerfile refid="trabalho_8cc">trabalho.cc</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/"/>
+    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/"/>
   </compounddef>
 </doxygen>

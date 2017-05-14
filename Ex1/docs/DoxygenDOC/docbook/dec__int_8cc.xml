@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="dec__int_8cc">
+    <title>dec_int.cc File Reference</title>
+    <programlisting>#include &lt;dec_int.h&gt;</programlisting>
+<para>Include dependency diagram for dec_int.cc</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="dec__int_8cc__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for dec_int.cc</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="dec__int_8cc__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Functions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="dec__int_8cc_1a1f3ef8f4ca93e37c2792f730a39c41f4">dec_int</link> (
+char * img_entrada, int fator)<para><emphasis>Quadriculador de imagens.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+        <title>Detailed Description</title>
+
+<para>Arquivo que expande os pixels de uma imagem. </para>
+
+<para><formalpara><title>Author: </title>
+
+<para>Pedro Nogueira - 14/0065032 </para>
+</formalpara>
+</para>
+    <para>Definition in file /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex1/src/dec_int.cc</para>
+    </simplesect>
+</section>

@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="trabalho_8cc">
     <title>trabalho.cc File Reference</title>
-    <programlisting>#include &lt;iostream&gt;</programlisting>
-    <programlisting>#include &lt;opencv2/opencv.hpp&gt;</programlisting>
+    <programlisting>#include &lt;realces.h&gt;</programlisting>
 <para>Include dependency diagram for trabalho.cc</para>
 <para>
     <figure>
@@ -25,23 +24,6 @@
         </mediaobject>
     </figure>
 </para>
-        <simplesect>
-            <title> Namespaces </title>
-            <para>
-                <itemizedlist>
-                    <listitem>
-                        <para>struct <link linkend="namespacestd">std</link></para>
-                    </listitem>
-                </itemizedlist>
-            </para>
-            <para>
-                <itemizedlist>
-                    <listitem>
-                        <para>struct <link linkend="namespacecv">cv</link></para>
-                    </listitem>
-                </itemizedlist>
-            </para>
-        </simplesect>
         <section>
             <title>Functions</title>
             <para>
@@ -57,13 +39,13 @@
     <simplesect>
         <title>Detailed Description</title>
 
-<para>Arquivo que vai rodar opencv lindão. </para>
+<para>Arquivo do segundo exercício do primeiro trabalho de IPI UnB - 1/2017. </para>
 
 <para><formalpara><title>Author: </title>
 
 <para>Pedro Nogueira - 14/0065032 </para>
 </formalpara>
 </para>
-    <para>Definition in file /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/src/trabalho.cc</para>
+    <para>Definition in file /home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/trabalho.cc</para>
     </simplesect>
 </section>

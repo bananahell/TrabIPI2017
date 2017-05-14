@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="realces_8h" kind="file" language="C++">
+    <compoundname>realces.h</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">opencv2/opencv.hpp</includes>
+    <includes local="no">cmath</includes>
+    <includedby refid="realces_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc</includedby>
+    <includedby refid="trabalho_8cc" local="no">/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/trabalho.cc</includedby>
+    <incdepgraph>
+      <node id="26">
+        <label>cmath</label>
+      </node>
+      <node id="25">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="24">
+        <label>vector</label>
+      </node>
+      <node id="23">
+        <label>iostream</label>
+      </node>
+      <node id="22">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/include/realces.h</label>
+        <link refid="realces.h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="28">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc</label>
+        <link refid="realces_8cc"/>
+      </node>
+      <node id="29">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/trabalho.cc</label>
+        <link refid="trabalho_8cc"/>
+      </node>
+      <node id="27">
+        <label>/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/include/realces.h</label>
+        <link refid="realces.h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacestd">std</innernamespace>
+    <innernamespace refid="namespacecv">cv</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="realces_8h_1a7ef97641d3e69f65f7d1acb790425d62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Mat</type>
+        <definition>Mat trans_power_law</definition>
+        <argsstring>(char *img, double fator)</argsstring>
+        <name>trans_power_law</name>
+        <param>
+          <type>char *</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>fator</declname>
+        </param>
+        <briefdescription>
+<para>Filtro de realce exponencial. </para>        </briefdescription>
+        <detaileddescription>
+<para>Aplicação do filtro de realce exponencial do constraste de imagens.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>img</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Imagem a ser filtrada </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Potência a ser usada no filtro </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/include/realces.h" line="27" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc" bodystart="13" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="realces_8h_1a9ac8c44030210f21ddd39f2b9d69cea0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Mat</type>
+        <definition>Mat trans_hist</definition>
+        <argsstring>(char *img)</argsstring>
+        <name>trans_hist</name>
+        <param>
+          <type>char *</type>
+          <declname>img</declname>
+        </param>
+        <briefdescription>
+<para>Filtro de histograma. </para>        </briefdescription>
+        <detaileddescription>
+<para>Aplicação do filtro de realce por histograma do constraste de imagens.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>img</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Imagem a ser filtrada </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/include/realces.h" line="37" column="1" bodyfile="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc" bodystart="43" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Arquivo que contém a biblioteca de <ref refid="realces_8cc" kindref="compound">realces.cc</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Pedro Nogueira - 14/0065032 </para></simplesect>
+</para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="10"><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;opencv2/opencv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacestd" kindref="compound">std</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacecv" kindref="compound">cv</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">Mat<sp/><ref refid="realces_8h_1a7ef97641d3e69f65f7d1acb790425d62" kindref="member">trans_power_law</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*img,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fator);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal">Mat<sp/><ref refid="realces_8h_1a9ac8c44030210f21ddd39f2b9d69cea0" kindref="member">trans_hist</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*img);</highlight></codeline>
+    </programlisting>
+    <location file="/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/include/realces.h"/>
+  </compounddef>
+</doxygen>

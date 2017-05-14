@@ -1,7 +1,7 @@
 /**
- * @file dec_int.cc
+ * @file edge_improv.cc
  * 
- * @brief Arquivo que vai rodar opencv lindão
+ * @brief Arquivo que contém os filtros de melhoramento subjetivo de imagens e que os aplica
  *
  * @author Pedro Nogueira - 14/0065032
  *

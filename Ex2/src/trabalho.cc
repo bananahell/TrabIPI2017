@@ -1,7 +1,7 @@
 /**
  * @file trabalho.cc
  * 
- * @brief Arquivo que vai rodar opencv lindão
+ * @brief Arquivo do segundo exercício do primeiro trabalho de IPI UnB - 1/2017
  *
  * @author Pedro Nogueira - 14/0065032
  *
@@ -21,10 +21,10 @@ int main() {
 //  char img_entrada[] = "./img/test80.jpg";
 //  char img_borrada[] = "./img/borrada.jpg";
 //  char img_entrada[] = "./img/test82.jpg";
-//  char img_entrada[] = "./img/car.png";
+  char img_entrada[] = "./img/car.png";
 //  char img_entrada[] = "./img/crowd.png";
 //  char img_entrada[] = "./img/university.png";
-  char img_entrada[] = "./img/jureg.jpg";
+//  char img_entrada[] = "./img/jureg.jpg";
 
 //  dec_int(img_entrada, 2);
   trans_hist(img_entrada);

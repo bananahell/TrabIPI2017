@@ -1,0 +1,73 @@
+\hypertarget{realces_8cc}{}\section{/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdução ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/src/realces.cc File Reference}
+\label{realces_8cc}\index{/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdução ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/src/realces.\+cc@{/home/pedro/\+Dropbox/\+Un\+B2017-\/1/\+Introdução ao Processamento de Imagens/\+Projetos/\+Trabalhos/\+Trab1\+I\+P\+I/\+Ex2/src/realces.\+cc}}
+
+
+Arquivo que contém os filtros de realce do contraste de imagens.  
+
+
+{\ttfamily \#include $<$realces.\+h$>$}\\*
+Include dependency graph for realces.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{realces_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Mat \hyperlink{realces_8cc_a7ef97641d3e69f65f7d1acb790425d62}{trans\+\_\+power\+\_\+law} (char $\ast$img, double fator)
+\begin{DoxyCompactList}\small\item\em Filtro de realce exponencial. \end{DoxyCompactList}\item 
+Mat \hyperlink{realces_8cc_a9ac8c44030210f21ddd39f2b9d69cea0}{trans\+\_\+hist} (char $\ast$img)
+\begin{DoxyCompactList}\small\item\em Filtro de histograma. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Arquivo que contém os filtros de realce do contraste de imagens. 
+
+\begin{DoxyAuthor}{Author}
+Pedro Nogueira -\/ 14/0065032 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{realces.\+cc@{realces.\+cc}!trans\+\_\+hist@{trans\+\_\+hist}}
+\index{trans\+\_\+hist@{trans\+\_\+hist}!realces.\+cc@{realces.\+cc}}
+\subsubsection[{\texorpdfstring{trans\+\_\+hist(char $\ast$img)}{trans_hist(char *img)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat trans\+\_\+hist (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{img}
+\end{DoxyParamCaption}
+)}\hypertarget{realces_8cc_a9ac8c44030210f21ddd39f2b9d69cea0}{}\label{realces_8cc_a9ac8c44030210f21ddd39f2b9d69cea0}
+
+
+Filtro de histograma. 
+
+Aplicação do filtro de realce por histograma do constraste de imagens.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & -\/ Imagem a ser filtrada \\
+\hline
+\end{DoxyParams}
+\index{realces.\+cc@{realces.\+cc}!trans\+\_\+power\+\_\+law@{trans\+\_\+power\+\_\+law}}
+\index{trans\+\_\+power\+\_\+law@{trans\+\_\+power\+\_\+law}!realces.\+cc@{realces.\+cc}}
+\subsubsection[{\texorpdfstring{trans\+\_\+power\+\_\+law(char $\ast$img, double fator)}{trans_power_law(char *img, double fator)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat trans\+\_\+power\+\_\+law (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{img, }
+\item[{double}]{fator}
+\end{DoxyParamCaption}
+)}\hypertarget{realces_8cc_a7ef97641d3e69f65f7d1acb790425d62}{}\label{realces_8cc_a7ef97641d3e69f65f7d1acb790425d62}
+
+
+Filtro de realce exponencial. 
+
+Aplicação do filtro de realce exponencial do constraste de imagens.
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & -\/ Imagem a ser filtrada \\
+\hline
+{\em fator} & -\/ Potência a ser usada no filtro \\
+\hline
+\end{DoxyParams}

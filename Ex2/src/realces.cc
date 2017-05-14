@@ -1,7 +1,7 @@
 /**
- * @file dec_int.cc
+ * @file realces.cc
  * 
- * @brief Arquivo que vai rodar opencv lindão
+ * @brief Arquivo que contém os filtros de realce do contraste de imagens
  *
  * @author Pedro Nogueira - 14/0065032
  *

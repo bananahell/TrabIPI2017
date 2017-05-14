@@ -1,0 +1,65 @@
+.TH "/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc" 3 "Mon May 8 2017" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/pedro/Dropbox/UnB2017-1/Introdução ao Processamento de Imagens/Projetos/Trabalhos/Trab1IPI/Ex2/src/realces.cc \- Arquivo que contém os filtros de realce do contraste de imagens\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <realces\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "Mat \fBtrans_power_law\fP (char *img, double fator)"
+.br
+.RI "\fIFiltro de realce exponencial\&. \fP"
+.ti -1c
+.RI "Mat \fBtrans_hist\fP (char *img)"
+.br
+.RI "\fIFiltro de histograma\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Arquivo que contém os filtros de realce do contraste de imagens\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Pedro Nogueira - 14/0065032 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "Mat trans_hist (char * img)"
+
+.PP
+Filtro de histograma\&. Aplicação do filtro de realce por histograma do constraste de imagens\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimg\fP - Imagem a ser filtrada 
+.RE
+.PP
+
+.SS "Mat trans_power_law (char * img, double fator)"
+
+.PP
+Filtro de realce exponencial\&. Aplicação do filtro de realce exponencial do constraste de imagens\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimg\fP - Imagem a ser filtrada 
+.br
+\fIfator\fP - Potência a ser usada no filtro 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.
