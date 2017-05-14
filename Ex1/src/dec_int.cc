@@ -10,20 +10,23 @@
 #include <dec_int.h>
 
 
-void dec_int(char *img_entrada, int fator) {
+void dec_int(string img_entrada, int fator) {
+
+  if (fator % 2 != 0) {
+    cout << "Fator de expansão da imagem deve ser par. Retornando com erro." << endl;
+    return;
+  }
 
   Mat imagem_orig;
-
   imagem_orig = imread(img_entrada, CV_LOAD_IMAGE_COLOR);
 
   if (!imagem_orig.data) {
-    cout << "No image data" << endl;
+    cout << "Imagem " << img_entrada << " não encontrada. Retornando com erro." << endl;
     return;
   }
 
   namedWindow("Original", WINDOW_AUTOSIZE);
   imshow("Original", imagem_orig);
-
 
   Mat imagem_menor(imagem_orig.rows/fator, imagem_orig.cols/fator, CV_8UC3, Scalar(0,0,0));
 
@@ -33,7 +36,10 @@ void dec_int(char *img_entrada, int fator) {
     }
   }
 
-  imwrite("./img/menor.jpg", imagem_menor);
+  string img_menor = img_entrada;
+  char *fator_string;
+  img_menor.insert(img_menor.find_last_of('.'), itoa(fator, fator_string, 10));
+  imwrite(img_menor, imagem_menor);
   namedWindow("Menor", WINDOW_AUTOSIZE);
   imshow("Menor", imagem_menor);
 
@@ -50,7 +56,7 @@ void dec_int(char *img_entrada, int fator) {
     }
   }
 
-  imwrite("./img/borrada.jpg", imagem_result);
+  imwrite("./img/ex1/borrada.jpg", imagem_result);
   namedWindow("Borrada", WINDOW_AUTOSIZE);
   imshow("Borrada", imagem_result);
 

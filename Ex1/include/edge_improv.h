@@ -8,6 +8,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include <opencv2/opencv.hpp>
 
 using namespace std;
@@ -21,7 +22,7 @@ using namespace cv;
  * @param img_entrada - Imagem a ser manipulada
  *
  */
-void edge_improv(char *img_entrada);
+void edge_improv(string img_entrada);
 
 /**
  * @brief Filtro de média

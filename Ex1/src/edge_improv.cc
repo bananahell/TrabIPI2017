@@ -10,8 +10,8 @@
 #include <edge_improv.h>
 
 
-void edge_improv(char *img_entrada) {
-  
+void edge_improv(string img_entrada) {
+
   Mat imagem_borrada;
   imagem_borrada = imread(img_entrada, CV_LOAD_IMAGE_COLOR);
 
@@ -69,7 +69,7 @@ void edge_improv(char *img_entrada) {
   imshow("Filtrada", imagem_filtrada_custom);
 
   waitKey(0);
-  
+
 }
 
 Mat filtro_custom(Mat img, int fator) {
@@ -85,7 +85,7 @@ Mat filtro_custom(Mat img, int fator) {
   if (fator %  2 == 0) {
     return imagem_nova;
   }
-  
+
   // Os três for's que iteram os pixels da imagem recebida
   for (row = 0; row < img.rows; ++row) {
     for (col = 0; col < img.cols; ++col) {
@@ -96,7 +96,7 @@ Mat filtro_custom(Mat img, int fator) {
 
         pixel_aux += img.at<Vec3b>(row, col)[chn];
         quant_pixels++;
-        
+
         row_menor_aval = true;
         row_maior_aval = true;
         // Iteração no "kernel" de filtragem (de 1 até a metade do fator passado, indo do centro do kernel até uma ponta - metade do kernel)
@@ -125,7 +125,7 @@ Mat filtro_custom(Mat img, int fator) {
           } else {
             row_menor_aval = false;
           }
-    
+
           if (row != img.rows-i && row_maior_aval) {
             pixel_aux += img.at<Vec3b>(row + i, col)[chn];
             quant_pixels++;
@@ -148,7 +148,7 @@ Mat filtro_custom(Mat img, int fator) {
           } else {
             row_maior_aval = false;
           }
-          
+
           if (col != i-1 && col_menor_aval) {
             pixel_aux += img.at<Vec3b>(row, col - i)[chn];
             quant_pixels++;

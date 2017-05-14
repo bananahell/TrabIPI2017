@@ -8,6 +8,8 @@
  */
 
 #include <iostream>
+#include <string>
+#include <cstdlib>
 #include <opencv2/opencv.hpp>
 
 using namespace std;
@@ -22,4 +24,4 @@ using namespace cv;
  * @param fator - Fator usado para multiplicar as dimensões dos pixels
  *
  */
-void dec_int(char *img_entrada, int fator);
+void dec_int(string img_entrada, int fator);
