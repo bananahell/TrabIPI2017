@@ -240,7 +240,7 @@ void DFTtoIDFT(string nomeFoto){
     int n = getOptimalDFTSize( I.cols ); // on the border add zero values
     copyMakeBorder(I, padded, 0, m - I.rows, 0, n - I.cols, BORDER_CONSTANT, Scalar::all(0));
 
-    Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
+    Mat planes[] = {Mat_<float>(I), Mat::zeros(I.size(), CV_32F)};
     Mat complexI;
     merge(planes, 2, complexI);         // Add to the expanded another plane with zeros
 
@@ -250,9 +250,6 @@ void DFTtoIDFT(string nomeFoto){
     magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
     /*complexI = planes[0];
 
- 	Mat final(I.rows,I.cols,CV_LOAD_IMAGE_GRAYSCALE,Scalar(0,0,0));
- 	Mat filtro1 = Filtro(local);
-    mulSpectrums(complexI,Filtro(local),final,DFT_COMPLEX_OUTPUT);
 
 
  	for(int i = 0;i < final.rows; i++){
@@ -261,8 +258,11 @@ void DFTtoIDFT(string nomeFoto){
  		}
  	}*/
 
-    
  	Mat magI = planes[0];
+    
+ 	Mat final(I.rows,I.cols,CV_LOAD_IMAGE_GRAYSCALE,Scalar(0,0,0));
+ 	Mat filtro1 = Filtro(local);
+    mulSpectrums(magI,filtro1,final,DFT_COMPLEX_OUTPUT);
 
     magI += Scalar::all(1);                    // switch to logarithmic scale
     log(magI, magI);
@@ -299,7 +299,7 @@ void DFTtoIDFT(string nomeFoto){
 
     //calculating the idft
     cv::Mat inverseTransform;
-    cv::dft(complexI, inverseTransform, cv::DFT_INVERSE|cv::DFT_REAL_OUTPUT);
+    cv::dft(filtro1, inverseTransform, cv::DFT_INVERSE|cv::DFT_REAL_OUTPUT);
     normalize(inverseTransform, inverseTransform, 0, 1, CV_MINMAX);
     imshow("Reconstructed", inverseTransform);
     waitKey();
