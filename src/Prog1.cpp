@@ -213,7 +213,6 @@ Mat Filtro(string local){
 
 				filtro.at<uchar>(i,j) = filtro.at<uchar>(i,j) * (1/(1+pow(D.at(cont)/D1,2*4))
 															  * (1/(1+pow(D.at(cont)/D2,2*4))));
-				cout << i << "," << j << "-" <<(int)filtro.at<uchar>(i,j) << endl;
 			}
 		}
 	}
@@ -248,21 +247,24 @@ void DFTtoIDFT(string nomeFoto){
 
 	split(complexI, planes);                   // planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
     magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
-    /*complexI = planes[0];
+    complexI = planes[0];
 
+ 	Mat magI = planes[0];
+    
+ 	Mat final(magI.rows,magI.cols,CV_LOAD_IMAGE_GRAYSCALE,Scalar(0,0,0));
+ 	Mat filtro1 = Filtro(local);
 
 
  	for(int i = 0;i < final.rows; i++){
  		for(int j = 0; j < final.cols; j++){
- 			final.at<uchar>(i,j) = complexI.at<uchar>(i,j) * filtro1.at<uchar>(i,j);
+ 			final.at<uchar>(i,j) = magI.at<uchar>(i,j) * (filtro1.at<uchar>(i,j)/255.0);
  		}
- 	}*/
+ 	}
 
- 	Mat magI = planes[0];
-    
- 	Mat final(I.rows,I.cols,CV_LOAD_IMAGE_GRAYSCALE,Scalar(0,0,0));
- 	Mat filtro1 = Filtro(local);
-    mulSpectrums(magI,filtro1,final,DFT_COMPLEX_OUTPUT);
+ 	imshow("FINAL",final);
+ 	waitKey(0);
+
+    //mulSpectrums(complexI,filtro1,final,DFT_COMPLEX_OUTPUT);
 
     magI += Scalar::all(1);                    // switch to logarithmic scale
     log(magI, magI);
@@ -299,7 +301,7 @@ void DFTtoIDFT(string nomeFoto){
 
     //calculating the idft
     cv::Mat inverseTransform;
-    cv::dft(filtro1, inverseTransform, cv::DFT_INVERSE|cv::DFT_REAL_OUTPUT);
+    cv::dft(complexI, inverseTransform, cv::DFT_INVERSE|cv::DFT_REAL_OUTPUT);
     normalize(inverseTransform, inverseTransform, 0, 1, CV_MINMAX);
     imshow("Reconstructed", inverseTransform);
     waitKey();
