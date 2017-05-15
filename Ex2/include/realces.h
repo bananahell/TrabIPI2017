@@ -8,9 +8,11 @@
  */
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
-#include <opencv2/opencv.hpp>
 #include <cmath>
+#include <opencv2/opencv.hpp>
 
 using namespace std;
 using namespace cv;
@@ -24,7 +26,7 @@ using namespace cv;
  * @param fator - Potência a ser usada no filtro
  *
  */
-Mat trans_power_law(char *img, double fator);
+Mat trans_power_law(string img, double fator);
 
 /**
  * @brief Filtro de histograma
@@ -34,4 +36,4 @@ Mat trans_power_law(char *img, double fator);
  * @param img - Imagem a ser filtrada
  *
  */
-Mat trans_hist(char *img);
+Mat trans_hist(string img);
