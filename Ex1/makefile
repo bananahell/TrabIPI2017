@@ -7,14 +7,14 @@
 # LibDIR = lib DIR
 # LibDIR -> enable when using, put $(LIBS) at end of gogo's command
 LibDIREC =./lib/
-LibDIR =./lib/ /home/user/gtest-1.7.0/include /home/user/gtest-1.7.0/lib/.libs/libgtest.a /usr/local/include/opencv2
+LibDIR =./lib/ /usr/local/include/opencv2
 IncludeDIR =./include/
 CcDIR=./src/
 ObjDIR=./src/obj/
 CC=g++
 DB=gdb
 CFLAGS=-ansi -Wall -Wextra -I$(IncludeDIR) -pthread -ftest-coverage -fprofile-arcs
-LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lgtest -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
+LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/lib/ -lopencv_highgui -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_video
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
