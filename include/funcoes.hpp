@@ -17,3 +17,9 @@ void geraHisto(string nomefoto);
 void powerLaw(string img, double fator);
 
 void geraGraficoHist(string nomeFoto);
+
+void DFTtoIDFT(string nomeFoto);
+
+Mat shift(Mat magI);
+
+Mat Filtro(string local);
