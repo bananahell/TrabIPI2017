@@ -18,9 +18,9 @@ LIBS=-I/usr/local/include/opencv/. -I/usr/local/include/opencv2/. -L/usr/local/l
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = filtra_dominio_freq.h
+headers =
 mainObject = trabalho
-objects = filtra_dominio_freq.o
+objects =
 
 # Set of *.h on which the *.cc depend
 _DEPS = $(headers)
