@@ -618,17 +618,17 @@ Mat Filtro(string local){
 }
 
 //funcao que rearranja o espectro transformado
-Mat shift(Mat magI){
-  magI = magI(Rect(0, 0, magI.cols & -2, magI.rows & -2));
+Mat shift(Mat Maux){
+  Maux = Maux(Rect(0, 0, Maux.cols & -2, Maux.rows & -2));
 
     // rearrange the quadrants of DFT image  so that the origin is at the image center
-    int cx = magI.cols/2;
-    int cy = magI.rows/2;
+    int cx = Maux.cols/2;
+    int cy = Maux.rows/2;
 
-    Mat q0(magI, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
-    Mat q1(magI, Rect(cx, 0, cx, cy));  // Top-Right
-    Mat q2(magI, Rect(0, cy, cx, cy));  // Bottom-Left
-    Mat q3(magI, Rect(cx, cy, cx, cy)); // Bottom-Right
+    Mat q0(Maux, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
+    Mat q1(Maux, Rect(cx, 0, cx, cy));  // Top-Right
+    Mat q2(Maux, Rect(0, cy, cx, cy));  // Bottom-Left
+    Mat q3(Maux, Rect(cx, cy, cx, cy)); // Bottom-Right
 
     Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
     q0.copyTo(tmp);
@@ -639,7 +639,7 @@ Mat shift(Mat magI){
     q2.copyTo(q1);
     tmp.copyTo(q2);
 
-    return magI;
+    return Maux;
 }
 
 //funcao que faz a transformada de Fourier e a inversa
@@ -675,16 +675,17 @@ void DFTtoIDFT(string nomeFoto){
 
     normalize(magI, magI, 0, 1, CV_MINMAX); 
 
-    /*Mat nova(I.rows,I.cols,CV_8U,Scalar(0,0,0));
+    complexI = shift(complexI);
+
+    Mat nova(I.rows,I.cols,CV_8U,Scalar(0,0,0));
 
     for(int i = 0;i < final.rows; i++){
-    for(int j = 0; j < final.cols; j++){
-      final.at<uchar>(i,j) = complexI.at<uchar>(i,j) * filtro1.at<uchar>(i,j);
+      for(int j = 0; j < final.cols; j++){
+        nova.at<uchar>(i,j) = complexI.at<uchar>(i,j) * filtro1.at<uchar>(i,j);
+      }
     }
-  }
 
-   
-    nova = shift(nova); */
+    nova = shift(nova); 
 
     imshow("Imagem Original"       , I   );    // Show the result
     imshow("filtro",filtro1);
@@ -698,8 +699,14 @@ void DFTtoIDFT(string nomeFoto){
     imshow("Inversa", inverseTransform);
     waitKey();
 
+    Mat gray;
+    magI.convertTo(gray, CV_8U, 255);
 
+    Mat grayttff;
+    inverseTransform.convertTo(grayttff,CV_8U,255);
+    
     imwrite("./img/filtro.png",filtro1);
-    imwrite("./img/espectroTransformado.png",magI);
+    imwrite("./img/espectroTransformado.tif",gray);
+    imwrite("./img/filtradamoire.tif",grayttff);
 
 }

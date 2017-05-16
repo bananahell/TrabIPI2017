@@ -10,7 +10,7 @@ using namespace cv;
 
 int main(){
 	
-	cout << "comecando o programa" << endl;
+	/*cout << "comecando o programa" << endl;
 	getchar();
 
 	cout << "usando dec_int para imagem test80.jpg" << endl;
@@ -35,7 +35,7 @@ int main(){
 	geraHisto("university.png");
 	geraGraficoHist("university.png");
 	geraGraficoHist("histuniversity.png");
-	
+	*/
 	DFTtoIDFT("moire.tif");
 
 	destroyAllWindows();
