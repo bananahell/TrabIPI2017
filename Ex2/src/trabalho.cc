@@ -25,11 +25,11 @@ int main() {
 //  char img_entrada[] = "./img/ayy/jureg.jpg";
 
   trans_hist(img_entrada);
-//  trans_power_law(img_entrada, 0.07);
+  trans_power_law(img_entrada, 0.07);
 //  trans_power_law(img_entrada, 0.08);
 //  trans_power_law(img_entrada, 0.09);
 //  trans_power_law(img_entrada, 0.3);
-//  trans_power_law(img_entrada, 0.4);
+  trans_power_law(img_entrada, 0.4);
 //  trans_power_law(img_entrada, 0.5);
 //  trans_power_law(img_entrada, 0.7);
 //  trans_power_law(img_entrada, 0.8);
@@ -38,10 +38,10 @@ int main() {
 //  trans_power_law(img_entrada, 1);
 //  trans_power_law(img_entrada, 2);
 //  trans_power_law(img_entrada, 3);
-//  trans_power_law(img_entrada, 6);
+  trans_power_law(img_entrada, 6);
 //  trans_power_law(img_entrada, 7);
 //  trans_power_law(img_entrada, 8);
-//  trans_power_law(img_entrada, 10);
+  trans_power_law(img_entrada, 10);
 //  trans_power_law(img_entrada, 20);
 //  trans_power_law(img_entrada, 30);
 
