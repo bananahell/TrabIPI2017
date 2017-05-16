@@ -59,8 +59,6 @@ void geraGraficoHist(string nomeFoto){
   string localgrf = "./img/grf" + nomeFoto;  
   imwrite(localgrf,histImage);
 
-  cout << nomeFoto << endl;
-
   waitKey(0);
 }
 
@@ -143,7 +141,7 @@ void edge_imporv(string nomeFoto){
 
 
   if (!imgOriginal.data) {
-    cout << "No image data" << endl;
+    cout << "Imagem nao encontrada" << endl;
     exit(0);//refazer isso aqui, eh feio
   }
 
@@ -470,29 +468,6 @@ void geraGrfHisto(Mat fotoHisto,string nomeFoto){
     }
   }
 
-  //gera "imagem" no terminal do grafico
-  /*for(int i = 0;i < 256; i++){
-    if(histoEQ.at(i) != 0){
-      
-      if( i >= 100){
-        cout << i << " - ";
-      }else{
-        if(i >= 10){
-
-          cout << i<< "  - ";
-        }else{
-
-          cout << i<< "   - ";
-        }
-      }
-          
-      for(int j = (histoEQ.at(i)&80); j > 1 ; j--){
-        cout << "*";
-      }
-      cout << endl;
-    }
-  }*/
-
   string nomeWindow = "Histo EQ " + nomeFoto;
   namedWindow(nomeWindow, WINDOW_AUTOSIZE);
   imshow(nomeWindow, grfHistoEQ);
@@ -552,25 +527,6 @@ void geraHisto(string nomefoto){
 
   namedWindow("fotohisto",CV_WINDOW_AUTOSIZE);
   imshow("fotohisto",fotoHisto);
-
-  //geracao funcao de densidade acumulada ->nao funciona ainda :/
-  /*for(int i = 0;i < 256; i++){
-
-    if( i >= 100){
-      cout << i << " - ";
-    }else{
-      if(i >= 10){
-
-        cout << i<< "  - ";
-      }else{
-
-        cout << i<< "   - ";
-      }
-    }
-    printf("%.7f\n",fdaFoto.at(i));
-  }*/
-
-  //waitKey(0);
 
   string localNovaFoto = "./img/hist" + nomefoto; 
 
@@ -732,7 +688,7 @@ void DFTtoIDFT(string nomeFoto){
 
     imshow("Imagem Original"       , I   );    // Show the result
     imshow("filtro",filtro1);
-    imshow("Spectro Tranformada", magI);
+    imshow("Espectro Tranformada", magI);
 
     //calculating the idft
     cv::Mat inverseTransform;
@@ -741,5 +697,9 @@ void DFTtoIDFT(string nomeFoto){
     //inverseTransform.convertTo(inverseTransform, CV_8U);
     imshow("Inversa", inverseTransform);
     waitKey();
+
+
+    imwrite("./img/filtro.png",filtro1);
+    imwrite("./img/espectroTransformado.png",magI);
 
 }
