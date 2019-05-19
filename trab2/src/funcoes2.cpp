@@ -1,8 +1,5 @@
-#include <funcoes.hpp>
+#include <funcoes.h>
 #include <string>
-
-using namespace std;
-using namespace cv;
 
 //funcao que gera o grafico da imagem com histograma equalizado
 void geraGraficoHist(string nomeFoto){
@@ -13,7 +10,7 @@ void geraGraficoHist(string nomeFoto){
 
   if( !src.data ){
     printf("imagem nao encontrada\n");
-    exit(0); 
+    exit(0);
   }
 
   vector<Mat> bgr_planes;
@@ -56,14 +53,14 @@ void geraGraficoHist(string nomeFoto){
   namedWindow(nomeFoto, CV_WINDOW_AUTOSIZE );
   imshow(nomeFoto, histImage );
 
-  string localgrf = "./img/grf" + nomeFoto;  
+  string localgrf = "./img/grf" + nomeFoto;
   imwrite(localgrf,histImage);
 
   waitKey(0);
 }
 
 //funcao que diminui e interpola a imagem
-Mat dec_int(Mat imgOri,int fator){ 
+Mat dec_int(Mat imgOri,int fator){
   Mat imgDim(imgOri.rows/fator,imgOri.cols/fator,CV_8UC3,Scalar(0,0,0));
   Mat imgInt(imgOri.rows,imgOri.cols,CV_8UC3,Scalar(0,0,0));
 
@@ -71,8 +68,8 @@ Mat dec_int(Mat imgOri,int fator){
   for(int i = 0; i < imgOri.rows; i+=fator){
     for(int j = 0; j < imgOri.cols; j+=fator){
 
-      imgDim.at<Vec3b>(i/fator,j/fator) = imgOri.at<Vec3b>(i,j); 
-      
+      imgDim.at<Vec3b>(i/fator,j/fator) = imgOri.at<Vec3b>(i,j);
+
     }
   }
 
@@ -80,10 +77,10 @@ Mat dec_int(Mat imgOri,int fator){
   for(int i = 0; i < imgOri.rows; i+=fator){
     for(int j = 0; j < imgOri.cols; j+=fator){
       for(int d = 0; d < fator; d++){
-        for(int c = 0;c < fator; c++){          
+        for(int c = 0;c < fator; c++){
 
-          imgInt.at<Vec3b>(i+d,j+c) = imgDim.at<Vec3b>(i/fator,j/fator); 
-          
+          imgInt.at<Vec3b>(i+d,j+c) = imgDim.at<Vec3b>(i/fator,j/fator);
+
         }
       }
     }
@@ -111,11 +108,11 @@ void edge_imporv(string nomeFoto){
   Mat imgfiltro(3,3,CV_8UC3,Scalar(0,0,0));
 
   for(int i = 0;i < imgfiltro.rows; i++){
-    for(int j = 0;j < imgfiltro.cols; j++){  
+    for(int j = 0;j < imgfiltro.cols; j++){
       for(int c = 0; c < 3;c++){
 
         imgfiltro.at<Vec3b>(i,j)[c] = 1;
-      
+
       }
     }
   }
@@ -130,7 +127,7 @@ void edge_imporv(string nomeFoto){
       for(int c = 0; c < 3; c++){
         if(i == 0 && j == 0){
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
                                           imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
                                           imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
@@ -139,10 +136,10 @@ void edge_imporv(string nomeFoto){
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
-        
+
         }else if(i == 0 && j!= imgOriginal.cols - 1){//se ja passou do primeiro pixel,mas mantem na primeira linha
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
                                           imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
                                           imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
@@ -151,10 +148,10 @@ void edge_imporv(string nomeFoto){
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
-          
+
         }else if(i == 0 && j == imgOriginal.cols - 1){//no ultimo pixel da primeira linha
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
                                           imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
                                           imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i+1,j-1)[c]    +
@@ -163,10 +160,10 @@ void edge_imporv(string nomeFoto){
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j)[c]        +
                                           imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i,j)[c])/9;
-          
+
         }else if(j == 0 && i != imgOriginal.rows - 1){//toda a primeira coluna antes da primeira e ultima linha
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
@@ -178,7 +175,7 @@ void edge_imporv(string nomeFoto){
 
         }else if(i != 0 && i != imgOriginal.rows -1 && j == imgOriginal.cols - 1){//toda a ultima coluna antes da primeira e da ultima linha
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
                                           imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
@@ -190,7 +187,7 @@ void edge_imporv(string nomeFoto){
 
         }else if(i == imgOriginal.rows - 1 && j == 0){//ultima linha e primeira coluna
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
@@ -202,7 +199,7 @@ void edge_imporv(string nomeFoto){
 
         }else if(i == imgOriginal.rows - 1 && j != imgOriginal.cols - 1 && j != 0){//toda a ultima linha antes da ultima coluna e depois da primeira
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
                                           imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
@@ -214,7 +211,7 @@ void edge_imporv(string nomeFoto){
 
         }else if(i == imgOriginal.rows -1 && j == imgOriginal.cols - 1){//ultima linha e ultima coluna
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
                                           imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
@@ -226,14 +223,14 @@ void edge_imporv(string nomeFoto){
 
         }else{//quando nao eh nenhum dos outros casos
 
-          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] + 
+          imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgOriginal.at<Vec3b>(i,j)[c] +
                                           imgfiltro.at<Vec3b>(0,0)[c] * imgOriginal.at<Vec3b>(i-1,j-1)[c]    +
                                           imgfiltro.at<Vec3b>(0,1)[c] * imgOriginal.at<Vec3b>(i-1,j)[c]      +
                                           imgfiltro.at<Vec3b>(0,2)[c] * imgOriginal.at<Vec3b>(i-1,j+1)[c]    +
                                           imgfiltro.at<Vec3b>(1,0)[c] * imgOriginal.at<Vec3b>(i,j-1)[c]      +
                                           imgfiltro.at<Vec3b>(1,2)[c] * imgOriginal.at<Vec3b>(i,j+1)[c]      +
                                           imgfiltro.at<Vec3b>(2,0)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c]    +
-                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      + 
+                                          imgfiltro.at<Vec3b>(2,1)[c] * imgOriginal.at<Vec3b>(i+1,j)[c]      +
                                           imgfiltro.at<Vec3b>(2,2)[c] * imgOriginal.at<Vec3b>(i+1,j+1)[c])/9;
 
         }
@@ -269,7 +266,7 @@ void edge_imporv(Mat imgEntrada){
 
         imgfiltro.at<Vec3b>(i,j)[c] = 1;
       }
-    }  
+    }
   }
 
   Mat imgfiltrada(imgEntrada.rows,imgEntrada.cols,CV_8UC3,Scalar(0,0,0));
@@ -283,7 +280,7 @@ void edge_imporv(Mat imgEntrada){
 
             if(i == 0 && j == 0){
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
@@ -292,10 +289,10 @@ void edge_imporv(Mat imgEntrada){
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
-            
+
             }else if(i == 0 && j!= imgEntrada.cols - 1){//se ja passou do primeiro pixel,mas mantem na primeira linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
@@ -304,10 +301,10 @@ void edge_imporv(Mat imgEntrada){
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
-              
+
             }else if(i == 0 && j == imgEntrada.cols - 1){//no ultimo pixel da primeira linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
                                               imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j-1)[c]    +
@@ -316,10 +313,10 @@ void edge_imporv(Mat imgEntrada){
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j)[c]        +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i,j)[c])/9;
-              
+
             }else if(j == 0 && i != imgEntrada.rows - 1){//toda a primeira coluna antes da primeira e ultima linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
@@ -331,7 +328,7 @@ void edge_imporv(Mat imgEntrada){
 
             }else if(i != 0 && i != imgEntrada.rows -1 && j == imgEntrada.cols - 1){//toda a ultima coluna antes da primeira e da ultima linha
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
@@ -343,7 +340,7 @@ void edge_imporv(Mat imgEntrada){
 
             }else if(i == imgEntrada.rows - 1 && j == 0){//ultima linha e primeira coluna
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
@@ -355,7 +352,7 @@ void edge_imporv(Mat imgEntrada){
 
             }else if(i == imgEntrada.rows - 1 && j != imgEntrada.cols - 1 && j != 0){//toda a ultima linha antes da ultima coluna e depois da primeira
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
@@ -367,7 +364,7 @@ void edge_imporv(Mat imgEntrada){
 
             }else if(i == imgEntrada.rows -1 && j == imgEntrada.cols - 1){//ultima linha e ultima coluna
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
@@ -379,14 +376,14 @@ void edge_imporv(Mat imgEntrada){
 
             }else{//quando nao eh nenhum dos outros casos
 
-              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] + 
+              imgfiltrada.at<Vec3b>(i,j)[c] = (int) (imgfiltro.at<Vec3b>(1,1)[c] * imgEntrada.at<Vec3b>(i,j)[c] +
                                               imgfiltro.at<Vec3b>(0,0)[c] * imgEntrada.at<Vec3b>(i-1,j-1)[c]    +
                                               imgfiltro.at<Vec3b>(0,1)[c] * imgEntrada.at<Vec3b>(i-1,j)[c]      +
                                               imgfiltro.at<Vec3b>(0,2)[c] * imgEntrada.at<Vec3b>(i-1,j+1)[c]    +
                                               imgfiltro.at<Vec3b>(1,0)[c] * imgEntrada.at<Vec3b>(i,j-1)[c]      +
                                               imgfiltro.at<Vec3b>(1,2)[c] * imgEntrada.at<Vec3b>(i,j+1)[c]      +
                                               imgfiltro.at<Vec3b>(2,0)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c]    +
-                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      + 
+                                              imgfiltro.at<Vec3b>(2,1)[c] * imgEntrada.at<Vec3b>(i+1,j)[c]      +
                                               imgfiltro.at<Vec3b>(2,2)[c] * imgEntrada.at<Vec3b>(i+1,j+1)[c])/9;
 
             }
@@ -420,11 +417,11 @@ void geraGrfHisto(Mat fotoHisto,string nomeFoto){
   }
 
   Mat grfHistoEQ(157,257,CV_LOAD_IMAGE_GRAYSCALE,Scalar(255,255,255));
-  
+
   //gerar imagem do grafico
   for(int i = 255; i > 1; i--){
     if(histoEQ.at(i) != 0){
-          
+
       for(int j = (histoEQ.at(i)%90); j > 0 ;j--){
         grfHistoEQ.at<uchar>(155 - j,i) = 0;
       }
@@ -453,7 +450,7 @@ void geraHisto(string nomefoto){
   }
 
   Mat fotoHisto(foto.rows,foto.cols,CV_LOAD_IMAGE_GRAYSCALE);
-  
+
   for(int i = 0;i < 256; i++){
     Rk.push_back(0);
     media.push_back(0);
@@ -491,7 +488,7 @@ void geraHisto(string nomefoto){
   namedWindow("fotohisto",CV_WINDOW_AUTOSIZE);
   imshow("fotohisto",fotoHisto);
 
-  string localNovaFoto = "./img/hist" + nomefoto; 
+  string localNovaFoto = "./img/hist" + nomefoto;
 
   imwrite(localNovaFoto,fotoHisto);
   waitKey(0);
@@ -527,7 +524,7 @@ void powerLaw(string nomeFoto, double fator) {
   namedWindow("Power Law", WINDOW_AUTOSIZE);
   imshow("Power Law", imagem_nova);
 
-  string localNovaFoto = "./img/PL" + nomeFoto; 
+  string localNovaFoto = "./img/PL" + nomeFoto;
 
   imwrite(localNovaFoto,imagem_nova);
 
@@ -541,7 +538,7 @@ Mat Filtro(string local){
 
   int arrUk[] = {39,-39,78,-78};
   vector<int> Uk(arrUk,arrUk + sizeof(arrUk)/sizeof(arrUk[0]));
-  
+
   int arrVk[] = {30,30,30,30};
   vector<int> Vk(arrVk,arrVk + sizeof(arrVk)/sizeof(arrVk[0]));
 
@@ -562,12 +559,12 @@ Mat Filtro(string local){
     for(int j = 0; j < filtro.cols; j++){
       filtro.at<uchar>(i,j) = 255;
     }
-  }  
+  }
 
   for(int cont = 0;cont < 4;cont++){
     for(int i = 0;i < filtro.rows;i++){
       for(int j = 0;j < filtro.cols;j++){
-        
+
         D1 = sqrt(pow(i-linha - Uk.at(cont),2) + pow(j-coluna-Vk.at(cont),2));
         D2 = sqrt(pow(i-linha + Uk.at(cont),2) + pow(j-coluna+Vk.at(cont),2));
 
@@ -627,7 +624,7 @@ void DFTtoIDFT(string nomeFoto){
     magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
 
     Mat magI = planes[0];
-    
+
     Mat final(I.rows,I.cols,CV_LOAD_IMAGE_GRAYSCALE,Scalar(0,0,0));
     Mat filtro1 = Filtro(local);
 
@@ -636,7 +633,7 @@ void DFTtoIDFT(string nomeFoto){
 
     magI = shift(magI);
 
-    normalize(magI, magI, 0, 1, CV_MINMAX); 
+    normalize(magI, magI, 0, 1, CV_MINMAX);
 
     complexI = shift(complexI);
 
@@ -648,7 +645,7 @@ void DFTtoIDFT(string nomeFoto){
       }
     }
 
-    nova = shift(nova); 
+    nova = shift(nova);
 
     // normalize(nova,nova,0,1,CV_MINMAX);
 
@@ -670,7 +667,7 @@ void DFTtoIDFT(string nomeFoto){
 
     Mat grayttff;
     inverseTransform.convertTo(grayttff,CV_8U,255);
-    
+
     imwrite("./img/filtro.png",filtro1);
     imwrite("./img/espectroTransformado.tif",gray);
     imwrite("./img/filtradamoire.png",grayttff);
