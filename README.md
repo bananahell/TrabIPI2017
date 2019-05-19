@@ -1,4 +1,4 @@
-# Trab1IPI
+# Trabalhos de IPI 2017/1 UnB
 
 Trabalho 1  
 
@@ -12,17 +12,19 @@ UnB
 
   O pdf do professor tá nessa pasta.  
   Tem um arquivo MyDoxygen que coloquei lá que já personalizei. Pretendo colocar a zoeira toda do doxygen lá. O .pdf final gerado pelo jeito sempre se chama refman.pdf.  
+  UPDATE: abandonei isso, to nem aí.  
 
 ### makefile
 
   Só bota ```make help``` na console e escolhe uma opção, mas não se preocupem em entender esse makefile, sério...  
+  UPDATE: agora ele está AINDA MAIOR, mas não é por mal não, ainda não tente entendê-lo...  
 
 ### lib, include e src
 
   Organização que o makefile entende, totalmente recomendo.  
 
    * lib - Recebe bibliotecas importadas (se bem que acho que isso tá meio quebrado)  
-   * include - Onde vão os headers (nosso caso, .hpp's)  
+   * include - Onde vão os headers (nosso caso, .h's)  
    * src - Onde vai o código (.cpp's) e os objetos (.o's, na pasta obj)
 
 ### Esse README.md
@@ -31,7 +33,7 @@ UnB
 
 ## Estilo
 
-Processamentoo de Imagens. Escolhi opencv em vez de matlab. Que Deus perdoe minha alma.  
+Processamentoo de Imagens. Escolhi opencv em vez de matlab. Que Deus perdoe minha alma. (PS: deu ruim)  
 Professor passou [isso aqui](http://www.ieee.org/conferences_events/conferences/publishing/templates.html).  
 Não querendo ser o chatão mas já sendo, acho importante ter um padrão de escrita (e inclusive praticar esse tipo de coisa).  
 Mesmo que isso venha do Jan, esse é o método de escrita usado pela [Google](https://google.github.io/styleguide/cppguide.html).  
